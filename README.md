@@ -1,24 +1,41 @@
-# README
+■サービス概要
+自分の推しを紹介できるサービスです
+絵が描けなくても、動画を作れなくても推しのいいところをみんなに伝えられます
+ランキング機能、新着一覧により自分の知らなかったキャラクターを知ることもできます
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+■作りたい理由
+絵が描ける人、動画を作れる人は推しへの愛をyoutube,pixiv等のサービスを使って発信できます
+ですがスキルがない人はコンテンツの消費に偏りがちになります
+そこでどんな人でも自分の好きなキャラについて語れて、発信できる場所を作りたいと思いました
 
-Things you may want to cover:
+■ユーザー層
+スキルを持たないが推しをみんなに広めたい人
+（もちろん絵が描けたり、動画を作れる人でも可）
 
-* Ruby version
+■サービスの利用イメージ
+誰でも気軽にキャラの紹介を投稿できる
+その投稿が人に見られやすいよう風通しのいい閲覧システムを作る
+自分が今まで知らなかった魅力的なキャラクターを知ることができる
 
-* System dependencies
+■差別化ポイント
+似ているサービス→pixiv
+pixivはやはり「イラスト投稿サイト」としての側面が強い
+それに対して自分のサービスは「キャラクター」に焦点を当てている
+またスキルを問わない点が優れている
 
-* Configuration
+■機能候補と実装方針予定
+MVPリリースまで
 
-* Database creation
+投稿作成機能→carrierwave,S3,cropper.js
+ログイン機能→sorcery
+新着一覧→kaminariによるページネーション
+Xへの共有→リンク設置
 
-* Database initialization
+本リリースまで
 
-* How to run the test suite
+スライダー→swiper
+ランキング→24時間以内の投稿名に対するいいね数と投稿数を合算する処理を実装
+連投防止→1日の投稿数を15個に制限する
+検索機能→ransack
+オートコンプリート→autoComplete.js
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
