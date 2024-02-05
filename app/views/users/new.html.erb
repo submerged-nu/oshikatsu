@@ -1,13 +1,16 @@
 <h1>ユーザー新規登録</h1>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
 <%= form_with model: @user do |f| %>
   <%= f.label :メールアドレス %><br>
   <%= f.text_field :email %><br>
 
   <%= f.label :パスワード %><br>
-  <%= f.password_field :password %><br>
-  
+  <%= f.password_field :password, placeholder: '英数8文字以上' %><br>
+
   <%= f.label :パスワード確認 %><br>
-  <%= f.password_field :password_confirmation %><br>
+  <%= f.password_field :password_confirmation %>
 
   <%= f.submit '登録する' %>
 <% end %>
