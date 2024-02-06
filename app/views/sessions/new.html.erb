@@ -1,0 +1,13 @@
+<h1>ログイン</h1>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+<%= form_with url: sessions_path do |f| %>
+  <%= f.label :メールアドレス %><br>
+  <%= f.text_field :email %><br>
+
+  <%= f.label :パスワード %><br>
+  <%= f.password_field :password %><br>
+
+  <%= f.submit '登録する' %>
+<% end %>
