@@ -1,0 +1,16 @@
+<h1>新規投稿</h1>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+<%= form_with model: @post, html: { multipart: true } do |f| %>
+  <%= f.label :image, '推しの画像' %><br>
+  <%= f.file_field :image %><br>
+
+  <%= f.label :name, '推しの名前' %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :body, '推しへの愛を語るところ' %><br>
+  <%= f.text_area :body %><br>
+
+  <%= f.submit '投稿する' %>
+<% end %>
