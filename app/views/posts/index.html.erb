@@ -1,6 +1,6 @@
 <h1>新着投稿</h1>
 <% @post.each do |post| %>
-  <div class="post">
+  <div class="post" data-post-id="<%= post.id %>" style="cursor: pointer;">
     <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
     <h2><%= post.name %></h2>
     <p><%= post.body %></p>
