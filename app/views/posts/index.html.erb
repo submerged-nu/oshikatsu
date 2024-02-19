@@ -1,8 +1,9 @@
 <h1>新着投稿</h1>
 <% @post.each do |post| %>
-  <div class="post" data-post-id="<%= post.id %>" style="cursor: pointer;">
+  <div class="post">
     <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
     <h2><%= post.name %></h2>
     <p><%= post.body %></p>
+    <%= link_to 'もっと見る', "#", onclick: "openModal(#{post.id}); return false;" %>
   </div>
 <% end %>
