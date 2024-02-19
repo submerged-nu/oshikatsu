@@ -24,7 +24,8 @@ class PostsController < ApplicationController
   end
 
   def show
-
+    @post = Post.find(params[:id])
+    render partial: "posts/show", locals: { post: @post }
   end
 
   def destroy
