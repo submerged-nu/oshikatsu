@@ -1,3 +1,4 @@
 <%= @post.name %>
 <%= @post.body %>
 <%= @post.id %>
+<%= link_to @post.user.name, user_path(@post.user) %>
