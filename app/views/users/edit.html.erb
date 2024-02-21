@@ -1,0 +1,10 @@
+<h1>ユーザー編集</h1>
+<%= form_with model: @user do |f| %>
+  <%= f.label :name, 'ユーザー名' %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :image, 'アイコン' %><br>
+  <%= f.file_field :image %><br>
+  <br>
+  <%= f.submit '投稿する' %>
+<% end %>
