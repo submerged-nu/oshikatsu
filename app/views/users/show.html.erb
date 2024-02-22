@@ -1,3 +1,4 @@
+<%= image_tag @user.image.url, size: '250×200' %>
 <p> <%= @user.name %>さんの推し一覧</p>
 <% @user.posts.each do |post| %>
   <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
