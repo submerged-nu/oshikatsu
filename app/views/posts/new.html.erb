@@ -12,5 +12,8 @@
   <%= f.label :body, '推しへの愛を語るところ' %><br>
   <%= f.text_area :body %><br>
 
+  <%= f.label :tags, "タグ (カンマ区切りで入力)" %><br>
+  <%= f.text_field :tags, value: @post.tags.map(&:name).join(", ") %><br>
+
   <%= f.submit '投稿する' %>
 <% end %>
