@@ -7,10 +7,8 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      respond_to do |format|
-        format.html { redirect_to @post }
-        format.js   # create.js.erbを探す
-      end
+      flash[:success] = 'コメントを投稿しました'
+      redirect_to root_path
     else
       flash[:danger].now = 'コメント投稿に失敗しました'
       render :new
