@@ -2,3 +2,21 @@
 <%= @post.body %>
 <%= @post.id %>
 <%= link_to @post.user.name, user_path(@post.user) %>
+
+<%= form_with model: [@post, @comment] do |f| %>
+  <%= f.text_area :body %><br>
+  <%= f.submit "コメントする" %>
+<% end %>
+
+<div id="comments">
+  <% @post.comments.each do |comment| %>
+    <p>
+      <%= comment.user.name %>
+      <%= comment.body %>
+      <% if comment.user == current_user %>
+        <%= link_to "削除", [comment.post, comment], method: :delete %>
+      <% end %>
+    </p>
+  <% end %>
+</div
+
