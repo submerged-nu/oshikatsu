@@ -8,7 +8,6 @@ class LikesController < ApplicationController
     if @like.save
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @post }
       end
     else
       # エラーハンドリング
