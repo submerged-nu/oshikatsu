@@ -8,3 +8,6 @@
     <%= link_to 'もっと見る', "#", onclick: "openModal(#{post.id}); return false;" %>
   </div>
 <% end %>
+<% if current_user %>
+  <%= button_to 'ログアウト', session_path(current_user.id), method: :delete %>
+<% end %>
