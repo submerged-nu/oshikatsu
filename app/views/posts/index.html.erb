@@ -4,6 +4,10 @@
     <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
     <h2><%= post.name %></h2>
     <p><%= post.body %></p>
+    <%= render partial: "posts/like", locals: { post: post } %>
     <%= link_to 'もっと見る', "#", onclick: "openModal(#{post.id}); return false;" %>
   </div>
+<% end %>
+<% if current_user %>
+  <%= button_to 'ログアウト', session_path(current_user.id), method: :delete %>
 <% end %>
