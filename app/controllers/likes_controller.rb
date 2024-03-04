@@ -10,16 +10,17 @@ class LikesController < ApplicationController
         format.turbo_stream
       end
     else
-      # エラーハンドリング
+      flash.now[:danger] = 'エラーが発生しました'
+      render :new
     end
   end
 
   def destroy
-    @like = current_user.likes.find_by(post_id: params[:post_id])
+    @like = current_user.likes.find_by(post_id: params[:id])
+    @post = @like.post
     @like.destroy
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to @post }
     end
   end
 end
