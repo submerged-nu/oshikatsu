@@ -1,0 +1,11 @@
+<h1>キャラクターランキング</h1>
+<% @ranking.each do |character| %>
+  <div>
+    <h2><%= character.name %></h2>
+    <% if @most_liked_images[character.id] %>
+      <%= image_tag(@most_liked_images[character.id].url, width: "150", height: "150") %>
+    <% else %>
+      <p>No image available</p>
+    <% end %>
+  </div>
+<% end %>
