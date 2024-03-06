@@ -9,4 +9,8 @@ class Post < ApplicationRecord
   validates :image, presence: true
   validates :name, presence: true
   validates :body, presence: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
 end
