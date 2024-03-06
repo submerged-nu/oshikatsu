@@ -20,7 +20,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    @post = Post.all.order(created_at: :desc)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true).order(created_at: :desc)
   end
 
   def show
