@@ -10,27 +10,16 @@
   </head>
 
   <body>
-    <%= yield %>
-    <div id="postModal" style="display:none;">
-      <div class="modal-content">
-        <span class="close-button" onclick="closeModal()">×</span>
-      <div id="modal-body"></div>
+  <% if logged_in? %>
+    <%= render 'layouts/header' %>
+  <% else %>
+    <%= render 'layouts/before_login_header' %>
+  <% end %>
+  <div class="main-content">
+    <%= render 'layouts/side_bar' %>
+    <div class="content">
+      <%= yield %>
     </div>
-
-    <script type="module">
-    function openModal(postId) {
-      fetch(`/posts/${postId}`)
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('modal-body').innerHTML = html;
-        document.getElementById('postModal').style.display = 'block';
-      });
-    }
-
-    // モーダルを閉じる関数
-    function closeModal() {
-      document.getElementById('postModal').style.display = 'none';
-    }
-    </script>
+  </div>
   </body>
 </html>

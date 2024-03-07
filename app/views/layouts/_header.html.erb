@@ -1,0 +1,11 @@
+<div class='header'>
+  <div class='logo'>
+    <h1>オシカツ！</h1>
+  </div>
+  <% if current_user %>
+    <div class="user-icon">
+      <%= image_tag(current_user.image.url, alt: current_user.name, width: "80", height: "80") %>
+    </div>
+  <% else %>
+  <% end %>
+</div>
