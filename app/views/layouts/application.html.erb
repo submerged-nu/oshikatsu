@@ -15,11 +15,7 @@
   <% else %>
     <%= render 'layouts/before_login_header' %>
   <% end %>
-  <div class="main-content">
-    <%= render 'layouts/side_bar' %>
-    <div class="content">
-      <%= yield %>
-    </div>
-  </div>
+  <%= render 'layouts/side_bar' %>
+  <%= yield %>
   </body>
 </html>
