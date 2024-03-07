@@ -17,41 +17,6 @@
  @import 'bootstrap';
  @import 'bootstrap-sprockets';
  
- .logo{
-  color: white;
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 20px;
-  margin-left: 20px;
- }
- 
- .header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: black;
-  padding: 20px 0;
-}
-
-.user-icon {
-  border-radius: 50%;
-  overflow: hidden;
-  margin-top: 10px;
-  margin-right: 20px;
-}
-
-.sidebar {
-  background-color: black;
-  color: white;
-  width: 300px;
-  padding: 20px;
-  height: 100vh;
-  float: left;
-}
-
-.main-content {
-  display: flex;
-}
 
 
 
