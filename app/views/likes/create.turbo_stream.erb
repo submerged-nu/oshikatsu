@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "like-#{@post.id}" do %>
+  <%= render partial: "posts/like", locals: { post: @post } %>
+<% end %>
+
+<%= turbo_stream.replace "modal-like-#{@post.id}" do %>
+  <%= render partial: "posts/like", locals: { post: @post } %>
+<% end %>

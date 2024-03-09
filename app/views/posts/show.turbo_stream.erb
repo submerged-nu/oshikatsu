@@ -1,9 +1,8 @@
 <%= @post.name %>
 <%= @post.body %>
 <%= @post.id %>
-<%= render 'posts/like' , { post: @post } %>
+<%= render 'posts/modal_like' , { post: @post } %>
 <%= link_to @post.user.name, user_path(@post.user) %>
-
 <%= form_with model: [@post, @comment] do |f| %>
   <%= f.text_area :body %><br>
   <%= f.submit "コメントする" %>
