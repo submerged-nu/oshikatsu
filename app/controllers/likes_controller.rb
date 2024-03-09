@@ -8,13 +8,11 @@ class LikesController < ApplicationController
 
     if @like.save
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id(@post, :likes), partial: "posts/like", locals: { post: @post })
-        end
+        format.turbo_stream
       end
     else
       flash.now[:danger] = 'エラーが発生しました'
-      render :new
+      render :root_path
     end
   end
 
@@ -23,9 +21,7 @@ class LikesController < ApplicationController
     @post = @like.post
     @like.destroy
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(dom_id(@post, :likes), partial: "posts/like", locals: { post: @post })
-      end
+      format.turbo_stream 
     end
   end
 end
