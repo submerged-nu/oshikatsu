@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :require_login
 
   def create
@@ -7,7 +8,9 @@ class LikesController < ApplicationController
 
     if @like.save
       respond_to do |format|
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(dom_id(@post, :likes), partial: "posts/like", locals: { post: @post })
+        end
       end
     else
       flash.now[:danger] = 'エラーが発生しました'
@@ -20,7 +23,9 @@ class LikesController < ApplicationController
     @post = @like.post
     @like.destroy
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(dom_id(@post, :likes), partial: "posts/like", locals: { post: @post })
+      end
     end
   end
 end
