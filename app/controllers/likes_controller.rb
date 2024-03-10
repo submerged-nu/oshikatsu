@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :require_login
 
   def create
@@ -11,7 +12,7 @@ class LikesController < ApplicationController
       end
     else
       flash.now[:danger] = 'エラーが発生しました'
-      render :new
+      render :root_path
     end
   end
 
@@ -20,7 +21,7 @@ class LikesController < ApplicationController
     @post = @like.post
     @like.destroy
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream 
     end
   end
 end
