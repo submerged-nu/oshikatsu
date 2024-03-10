@@ -1,4 +1,4 @@
-<div id='like-<%= post.id %>'>
+<div id='modal-like-<%= post.id %>'>
   <% if current_user&.likes&.exists?(post: post) %>
     <%= link_to 'いいねを取り消す', like_path(post), data: { "turbo_method": :delete } %>
   <% elsif current_user %>

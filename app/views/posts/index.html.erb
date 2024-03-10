@@ -15,7 +15,7 @@
       <h2><%= post.name %></h2>
       <p><%= post.body %></p>
       <%= render partial: "posts/like", locals: { post: post } %>
-      <%= link_to 'もっと見る', "#", onclick: "openModal(#{post.id}); return false;" %>
+      <%= link_to 'もっと見る', post_path(post.id), data: { turbo_stream: true } %>
     </div>
   <% end %>
 <% else %>
