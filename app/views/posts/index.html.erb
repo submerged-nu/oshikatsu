@@ -18,6 +18,7 @@
       <%= link_to 'もっと見る', post_path(post.id), data: { turbo_stream: true } %>
     </div>
   <% end %>
+  <%= paginate @posts %>
 <% else %>
   <p>検索がヒットしませんでした</p>
 <% end %>
