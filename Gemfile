@@ -11,6 +11,7 @@ gem 'ransack'
 gem 'jquery-rails'
 gem "sass-rails", "~>5.0"
 gem "jquery-ui-rails"
+gem 'kaminari'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
 
