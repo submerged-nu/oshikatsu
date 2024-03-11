@@ -1,11 +1,12 @@
 <%= image_tag @user.image.url, size: '250×200' %>
 <p> <%= @user.name %>さんの推し一覧</p>
-<% @user.posts.each do |post| %>
+<% @posts.each do |post| %>
   <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
   <h2><%= post.name %></h2>
   <p><%= post.body %></p>
-  <%= link_to 'もっと見る', "#", onclick: "openModal(#{post.id}); return false;" %><br>
+  <%= link_to 'もっと見る', post_path(post.id), data: { turbo_stream: true } %><br>
 <% end %>
+<%= paginate @posts %>
 <% if current_user == @user %>
   <%= link_to 'ユーザー編集' , edit_user_path(@user) %>
 <% end %>
