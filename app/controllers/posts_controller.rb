@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     if @post.save
       process_tags(post_params[:tags])
       flash[:notice] = '投稿しました'
-      redirect_to posts_path
+      render json: { redirect_url: posts_path }, status: :created
     else
       flash.now[:danger] = '投稿に失敗しました'
       render :new
