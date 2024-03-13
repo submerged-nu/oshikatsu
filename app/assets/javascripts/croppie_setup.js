@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('post[name]', document.getElementById('post_name').value);
         formData.append('post[body]', document.getElementById('post_body').value);
 
-        // タグ入力がある場合にのみ値を追加
         var tagsElement = document.getElementById('post_tags');
         if (tagsElement) {
           formData.append('post[tags]', tagsElement.value);
