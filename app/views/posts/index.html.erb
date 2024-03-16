@@ -1,28 +1,29 @@
-<h1>新着投稿</h1>
-<%= search_form_for @q do |f| %>
-  <div class="search-field">
-    <%= f.label :name_cont, 'キャラクター名検索' %>
-    <%= f.search_field :name_cont %>
-  </div>
-  <div class="search-submit">
-    <%= f.submit "検索" %>
-  </div>
-<% end %>
-<% if @posts.present? %>
-  <% @posts.each do |post| %>
-    <div class="post">
-      <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
-      <h2><%= post.name %></h2>
-      <p><%= post.body %></p>
-      <%= render partial: "posts/like", locals: { post: post } %>
-      <%= link_to 'もっと見る', post_path(post.id), data: { turbo_stream: true } %>
+<div class="d-flex align-items-center justify-content-between">
+  <h1>新着投稿</h1>
+  <%= search_form_for @q do |f| %>
+    <div class="search-field d-flex align-items-center">
+      <%= f.label :name_cont, 'キャラクター名検索', style: 'margin-right: 20px;' %>
+      <%= f.search_field :name_cont, class: 'mr-2', style: 'margin-right: 20px;' %>
+      <%= f.submit "検索", class: 'btn btn-primary', style: 'margin-right: 700px;' %>
     </div>
   <% end %>
+</div>
+<% if @posts.present? %>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-2 mb-4">
+        <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
+          <div class="post">
+            <%= image_tag(post.image.url, alt: post.name, class: 'img-fluid', style: 'border-radius: 10%;') %>
+            <h2><%= post.name %></h2>
+            <p><%= post.body %></p>
+            <%= render partial: "posts/like", locals: { post: post } %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <%= paginate @posts %>
 <% else %>
   <p>検索がヒットしませんでした</p>
-<% end %>
-
-<% if current_user %>
-  <%= button_to 'ログアウト', session_path(current_user.id), method: :delete %>
 <% end %>

@@ -1,0 +1,25 @@
+.form-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.flash-message {
+  margin-bottom: 10px;
+}
+
+.login_and_user_registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+}

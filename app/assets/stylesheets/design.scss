@@ -1,0 +1,64 @@
+.border-short {
+  display: none;
+}
+
+.header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+.sidebar {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  left: 0;
+  width: 150px;
+  height: calc(100vh - 50px);
+  background-color: #fff;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.sidebar a {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  padding-left: 150px;
+  padding-right: 150px;
+  margin-left: 150px;
+  margin-top: 50px;
+  z-index: 2;
+}
+
+.line {
+  position: fixed;
+  left: 150px;
+  top: 70px;
+  bottom: 0;
+  width: 1px;
+  background-color: #ccc;
+  z-index: 1;
+}
+
+.post {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: 5px;
+  width: 190px;
+  margin-bottom: 20px;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-button{
+  text-align: right;
+}

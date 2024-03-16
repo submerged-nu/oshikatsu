@@ -1,1 +1,10 @@
-_before_login_header.html.erb
+<div class='header d-flex justify-content-between align-items-center' style='min-height: 70px;'>
+  <div class='border-short'></div>
+  <div class='logo'>
+    <h1 class='mb-0'>オシカツ！</h1>
+  </div>
+  <div class='right d-flex align-items-center'>
+    <%= link_to 'ログイン', new_session_path, class: 'me-4' %>
+    <%= link_to '新規登録', new_user_path, class: 'me-3' %>
+  </div>
+</div>
