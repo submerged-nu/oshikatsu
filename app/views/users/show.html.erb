@@ -13,18 +13,25 @@
     </div>
   <% end %>
 </div><br>
-<div class="row">
+<% if @posts.present? %>
+  <div class="row">
   <% @posts.each do |post| %>
-    <div class="col-md-2">
-      <div class="post border">
-        <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
-          <%= image_tag(post.image.url, alt: post.name, width: "100%", style: 'border-radius: 10%;') %>
-          <h2><%= post.name %></h2>
-          <p><%= post.body %></p>
-          <%= render partial: "posts/like", locals: { post: post } %>
-        <% end %>
-      </div>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
+      <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
+        <div class="post">
+          <div class="image-container">
+            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 10%;') %>
+            <div class="like-icon">
+              <%= render partial: "posts/like", locals: { post: post } %>
+            </div>
+          </div>
+          <h2 class="post-name"><%= post.name.truncate(11) %></h2>
+          <%= post.body.truncate(50) %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
-
+  <% end %>  
+  </div>
+<% else %>
+  <p>投稿がありません</p>
+<% end %>

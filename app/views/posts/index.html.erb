@@ -1,29 +1,47 @@
-<div class="d-flex align-items-center justify-content-between">
-  <h1>新着投稿</h1>
-  <%= search_form_for @q do |f| %>
-    <div class="search-field d-flex align-items-center">
-      <%= f.label :name_cont, 'キャラクター名検索', style: 'margin-right: 20px;' %>
-      <%= f.search_field :name_cont, class: 'mr-2', style: 'margin-right: 20px;' %>
-      <%= f.submit "検索", class: 'btn btn-primary', style: 'margin-right: 700px;' %>
-    </div>
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="flex-shrink-0">新着投稿</h1>
+  <%= search_form_for @q, html: { class: 'flex-grow-1 d-flex align-items-center' } do |f| %>
+    <div class="d-flex align-items-center col-md-4"> 
+    <%= f.label :name_cont, 'キャラクター名検索', class: 'me-2', style: 'white-space: nowrap' %>
+    <%= f.search_field :name_cont, class: 'me-2 flex-grow-1' %>
+    <%= f.submit "検索", class: 'btn btn-primary ms-auto' %>
+  </div>  
   <% end %>
 </div>
 <% if @posts.present? %>
   <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-2 mb-4">
-        <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
-          <div class="post">
-            <%= image_tag(post.image.url, alt: post.name, class: 'img-fluid', style: 'border-radius: 10%;') %>
-            <h2><%= post.name %></h2>
-            <p><%= post.body %></p>
-            <%= render partial: "posts/like", locals: { post: post } %>
+  <% @posts.each do |post| %>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
+      <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
+        <div class="post">
+          <div class="image-container">
+            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 10%;') %>
+            <div class="like-icon">
+              <%= render partial: "posts/like", locals: { post: post } %>
+            </div>
           </div>
-        <% end %>
-      </div>
-    <% end %>
+          <h2 class="post-name"><%= post.name.truncate(11) %></h2>
+          <%= post.body.truncate(50) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>  
   </div>
-  <%= paginate @posts %>
 <% else %>
   <p>検索がヒットしませんでした</p>
 <% end %>
+<%= paginate @posts %>
+
+<div class="modal fade" id="modal<%= @post&.id %>" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>

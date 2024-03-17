@@ -1,6 +1,6 @@
+<%= image_tag @post.image.url %>
 <%= @post.name %>
 <%= @post.body %>
-<%= @post.id %>
 <%= render 'posts/modal_like' , { post: @post } %>
 <%= link_to @post.user.name, user_path(@post.user) %>
 <%= form_with model: [@post, @comment] do |f| %>
@@ -11,7 +11,23 @@
 <div id="comments">
   <% @post.comments.each do |comment| %>
     <p>
-      <%= comment.user.name %>
+      <%= comment.user.name %><div class="modal fade" id="modal<%= post.id %>" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- モーダルのヘッダー -->
+      <div class="modal-header">
+        <h5 class="modal-title">投稿詳細</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- モーダルのボディ -->
+      <div class="modal-body">
+        <!-- 動的に内容が挿入される -->
+      </div>
+    </div>
+  </div>
+</div>
       <%= comment.body %>
       <% if comment.user == current_user %>
         <%= link_to "削除", [comment.post, comment], method: :delete %>

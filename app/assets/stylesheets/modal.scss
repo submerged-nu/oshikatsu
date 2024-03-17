@@ -1,0 +1,13 @@
+.modal {
+  z-index: 2000;
+}
+
+.modal-content {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.modal-dialog {
+  margin: 1.75rem auto;
+  max-width: 800px;
+}
