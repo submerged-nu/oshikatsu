@@ -1,7 +1,7 @@
 var croppieInstance;
 var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-document.addEventListener('turbo:load', function() {
+document.addEventListener('DOMContentLoaded', function() {
   var cropperElement = document.getElementById('image-cropper');
 
   if (cropperElement) {
