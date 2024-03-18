@@ -7,11 +7,7 @@
       <div class="col-md-2 mb-4">
         <%= link_to posts_path(q: { name_cont: character.name }), class: "text-decoration-none" do %>
           <div class="post">
-            <% if @most_liked_images[character.id] %>
-              <%= image_tag(@most_liked_images[character.id].url, alt: character.name, class: 'img-fluid', style: 'border-radius: 10%;') %>
-            <% else %>
-              <p>画像がありません</p>
-            <% end %>
+            <%= image_tag(@most_liked_images[character.id], alt: character.name, class: 'img-fluid', style: 'border-radius: 10%;') %>
             <h2 class="post-name"><%= character.name.truncate(11) %></h2>
           </div>
         <% end %>
@@ -19,5 +15,5 @@
     <% end %>
   </div>
 <% else %>
-  <p>投稿がありませんでした</p>
+  <p>ランキングが作成されませんでした</p>
 <% end %>
