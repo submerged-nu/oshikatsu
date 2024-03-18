@@ -1,38 +1,37 @@
-<%= image_tag @post.image.url %>
-<%= @post.name %>
-<%= @post.body %>
-<%= render 'posts/modal_like' , { post: @post } %>
-<%= link_to @post.user.name, user_path(@post.user) %>
-<%= form_with model: [@post, @comment] do |f| %>
-  <%= f.text_area :body %><br>
-  <%= f.submit "コメントする" %>
-<% end %>
-
-<div id="comments">
-  <% @post.comments.each do |comment| %>
-    <p>
-      <%= comment.user.name %><div class="modal fade" id="modal<%= post.id %>" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <!-- モーダルのヘッダー -->
-      <div class="modal-header">
-        <h5 class="modal-title">投稿詳細</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- モーダルのボディ -->
-      <div class="modal-body">
-        <!-- 動的に内容が挿入される -->
-      </div>
+<div class='modal-overlay'>
+<div class='modal-content'>
+  <%= image_tag @post.image.url, class: 'modal_post_image' %>
+  <h2><%= @post.name %></h2>
+  <p><%= @post.body %></p>
+  <div class="post-interaction-container">
+    <div class="post-user">
+      <%= link_to user_path(@post.user), class: 'btn btn-link' do %>
+        <%= image_tag @post.user.image.url, class: 'user-icon' %>
+      <% end %>
+      <%= link_to user_path(@post.user), class: 'btn btn-link' do %>
+        <%= @post.user.name %>
+      <% end %>
+    </div>
+    <div class="like-button">
+      <%= render 'posts/modal_like', post: @post %>
     </div>
   </div>
-</div>
-      <%= comment.body %>
-      <% if comment.user == current_user %>
-        <%= link_to "削除", [comment.post, comment], method: :delete %>
-      <% end %>
-    </p>
+  <%= form_with model: [@post, @comment], class: 'mt-3' do |f| %>
+  <div class="mb-3">
+    <%= f.text_area :body, class: 'form-control', placeholder: 'コメントを入力...' %>
+  </div>
+  <%= f.submit 'コメントする', class: 'btn btn-primary' %>
   <% end %>
+    <div id="comments" class="mt-4">
+    <% @post.comments.each do |comment| %>
+      <div class="mb-2">
+        <strong><%= comment.user.name %>:</strong>
+        <p><%= comment.body %></p>
+        <% if comment.user == current_user %>
+          <%= link_to '削除', [comment.post, comment], method: :delete, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
+</div>

@@ -96,3 +96,22 @@
   color: red;
 }
 
+.post-user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+}
+
+.like_button{
+  padding-right: 15px
+}
+
+
