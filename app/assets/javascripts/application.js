@@ -4,3 +4,4 @@
 //= require turbo
 //= require croppie
 //= require croppie_setup
+//= require close_modal

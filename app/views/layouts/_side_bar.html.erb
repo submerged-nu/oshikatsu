@@ -1,4 +1,11 @@
-<div class="sidebar">
-  <%= link_to '新着', posts_path %><br>
+<div class="line"></div>
+<div class="sidebar"><br><br>
+  <%= link_to '新着', posts_path %>
   <%= link_to 'ランキング', characters_ranking_path %>
+  <%= link_to 'お問い合わせ', 'https://twitter.com/ShimejiOnRails' %>
+  <%= link_to 'プライバシーポリシー' , privacy_policy_path %>
+  <%= link_to '利用規約' , terms_of_service_path %>
+  <% if logged_in? %>
+    <%= link_to 'ログアウト' ,session_path(@current_user.id), data: {turbo_method: :delete} %> 
+  <% end %>
 </div>

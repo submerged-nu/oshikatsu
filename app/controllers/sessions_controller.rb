@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  layout 'no_sidebar', only: [:new]
+  
   def new; end
 
   def create
@@ -6,7 +8,7 @@ class SessionsController < ApplicationController
     if @user&.valid_password?(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = 'ログインしました' 
-      redirect_to new_session_path
+      redirect_to root_path
     else
       flash.now[:danger] = 'ログインに失敗しました'
       render :new

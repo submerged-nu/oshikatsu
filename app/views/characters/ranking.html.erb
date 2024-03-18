@@ -1,11 +1,23 @@
-<h1>キャラクターランキング</h1>
-<% @ranking.each do |character| %>
-  <div>
-  <%= link_to character.name,posts_path(q: { name_cont: character.name }) %>
-    <% if @most_liked_images[character.id] %>
-      <%= image_tag(@most_liked_images[character.id].url, width: "150", height: "150") %>
-    <% else %>
-      <p>No image available</p>
+<div class="d-flex align-items-center justify-content-between">
+  <h1>キャラクターランキング</h1>
+</div>
+<% if @ranking.present? %>
+  <div class="row">
+    <% @ranking.each do |character| %>
+      <div class="col-md-2 mb-4">
+        <%= link_to posts_path(q: { name_cont: character.name }), class: "text-decoration-none" do %>
+          <div class="post">
+            <% if @most_liked_images[character.id] %>
+              <%= image_tag(@most_liked_images[character.id].url, alt: character.name, class: 'img-fluid', style: 'border-radius: 10%;') %>
+            <% else %>
+              <p>画像がありません</p>
+            <% end %>
+            <h2 class="post-name"><%= character.name.truncate(11) %></h2>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
+<% else %>
+  <p>投稿がありませんでした</p>
 <% end %>

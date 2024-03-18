@@ -1,0 +1,117 @@
+.border-short {
+  display: none;
+}
+
+.header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+.sidebar {
+  top: 50px;
+  bottom: 50px;
+  left: 0;
+  width: 150px;
+  height: calc(100vh - 50px);
+  background-color: #fff;
+  overflow-y: auto;
+  z-index: 2;
+  position: fixed;
+}
+
+.sidebar a {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  padding-left: 100px;
+  padding-right: 100px;
+  margin-left: 150px;
+  margin-top: 50px;
+  z-index: 2;
+}
+
+.line {
+  position: fixed;
+  left: 150px;
+  top: 70px;
+  bottom: 0;
+  width: 1px;
+  background-color: #ccc;
+  z-index: 1;
+}
+
+.post {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 2;
+}
+
+.image-container {
+  position: relative;
+}
+
+.like-icon {
+  position: absolute;
+  bottom: 1px;
+  right: 3px;
+  color: red;
+}
+
+.post-img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+
+.text-decoration-none {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-button{
+  text-align: right;
+}
+
+.post-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  max-width: 100%;
+}
+
+.heart-icon {
+  color: red;
+}
+
+.post-user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+}
+
+.like_button{
+  padding-right: 15px
+}
+
+

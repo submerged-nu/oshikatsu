@@ -1,12 +1,37 @@
-<%= image_tag @user.image.url, size: '250×200' %>
-<p> <%= @user.name %>さんの推し一覧</p>
-<% @posts.each do |post| %>
-  <%= image_tag(post.image.url, alt: post.name, width: "150", height: "150") %>
-  <h2><%= post.name %></h2>
-  <p><%= post.body %></p>
-  <%= link_to 'もっと見る', post_path(post.id), data: { turbo_stream: true } %><br>
-<% end %>
-<%= paginate @posts %>
-<% if current_user == @user %>
-  <%= link_to 'ユーザー編集' , edit_user_path(@user) %>
+<div class="d-flex align-items-center justify-content-start" style="margin-top: -10px;">
+  <% if @user.image.url %>
+    <div style="margin-right: 30px;">
+      <%= image_tag @user.image.url, size: '100x100', style: 'border-radius: 50%;' %>
+    </div>
+  <% end %>
+  <div style="flex-grow: 1; min-width: 0;">
+    <p style="margin: 0; font-size: 20px;"><%= @user.name %>さんの推し一覧</p>
+  </div>
+  <% if current_user == @user %>
+    <div style="margin-left: auto; margin-right: 60px;">
+      <%= link_to 'ユーザー編集', edit_user_path(@user) %>
+    </div>
+  <% end %>
+</div><br>
+<% if @posts.present? %>
+  <div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
+      <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
+        <div class="post">
+          <div class="image-container">
+            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 10%;') %>
+            <div class="like-icon">
+              <%= render partial: "posts/like", locals: { post: post } %>
+            </div>
+          </div>
+          <h2 class="post-name"><%= post.name.truncate(11) %></h2>
+          <%= post.body.truncate(50) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>  
+  </div>
+<% else %>
+  <p>投稿がありません</p>
 <% end %>

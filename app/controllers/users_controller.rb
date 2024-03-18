@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
   before_action :identity_verification, only: [:edit, :update]
-
+  layout 'no_sidebar', only: [:new]
+  
   def new
     @user = User.new
   end
