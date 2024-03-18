@@ -20,16 +20,17 @@
   background-color: #fff !important;
   border-radius: 3% !important;
   max-width: 35%;
-  max-height: 80%;
+  height: 800px;
   overflow: auto;
   z-index: 3000;
 }
 
 .modal_post_image {
-  width: 200px;
+  width: 250px;
   object-fit: contain;
   border-radius: 20px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
 }
 
