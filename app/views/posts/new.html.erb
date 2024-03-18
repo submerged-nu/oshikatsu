@@ -1,7 +1,7 @@
 <h1>新規投稿</h1>
 <div id="image-cropper"></div>
 <%= form_with model: @post, html: { multipart: true } do |f| %>
-  <%= f.label :image, '推しの画像' %><br>
+  <%= f.label :image, '推しの画像(png.jpg形式)' %><br>
   <%= f.file_field :image %><br>
 
   <%= f.label :name, '推しの名前' %><br>
