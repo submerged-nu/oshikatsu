@@ -57,6 +57,16 @@
   aspect-ratio: 1 / 2;
 }
 
+.ranking-post{
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
 .image-container {
   position: relative;
 }
@@ -88,7 +98,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 14px;
+  font-size: 20px;
   max-width: 100%;
 }
 

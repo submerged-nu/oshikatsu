@@ -6,8 +6,8 @@
     <% @ranking.each do |character| %>
       <div class="col-md-2 mb-4">
         <%= link_to posts_path(q: { name_cont: character.name }), class: "text-decoration-none" do %>
-          <div class="post">
-            <%= image_tag(@most_liked_images[character.id], alt: character.name, class: 'img-fluid', style: 'border-radius: 10%;') %>
+          <div class="ranking-post">
+            <%= image_tag(@most_liked_images[character.id], alt: character.name, class: 'post-img', style: 'border-radius: 10%;') %>
             <h2 class="post-name"><%= character.name.truncate(11) %></h2>
           </div>
         <% end %>
