@@ -11,13 +11,22 @@ document.addEventListener('turbo:load', function() {
     });
 
     document.querySelector('input[type=file]').addEventListener('change', function() {
+      var file = this.files[0];
+      var fileType = file.type;
+      var matches = fileType.match(/image\/(png|jpeg)/);
+
+      if (matches === null) {
+        this.value = '';
+        return;
+      }
+
       var reader = new FileReader();
       reader.onload = function(e) {
         croppieInstance.bind({
           url: e.target.result
         });
       };
-      reader.readAsDataURL(this.files[0]);
+      reader.readAsDataURL(file);
     });
 
     document.querySelector('form').addEventListener('submit', function(e) {
