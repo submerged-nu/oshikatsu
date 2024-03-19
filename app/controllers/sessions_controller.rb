@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  layout 'no_sidebar', only: [:new]
-  
   def new; end
 
   def create

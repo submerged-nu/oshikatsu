@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       render json: { redirect_url: posts_path }, status: :created
     else
       flash.now[:danger] = '投稿に失敗しました'
-      render :new
+      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -26,6 +26,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.order(created_at: :desc)
     @comment = Comment.new
   end
 

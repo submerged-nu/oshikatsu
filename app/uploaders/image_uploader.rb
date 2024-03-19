@@ -31,6 +31,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  def default_url(*args)
+    'https://oshikatsu-storage.s3.amazonaws.com/uploads/user/image/3/kkrn_icon_user_11.png'
+  end
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]

@@ -8,11 +8,10 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       flash[:success] = 'コメントを投稿しました'
-      redirect_to root_path
     else
-      flash[:danger].now = 'コメント投稿に失敗しました'
-      render :new
+      flash[:danger] = 'コメントは200文字以内にしてください'
     end
+    redirect_to root_path
   end
 
   def destroy

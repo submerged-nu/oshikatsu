@@ -13,7 +13,7 @@ document.addEventListener('turbo:load', function() {
     document.querySelector('input[type=file]').addEventListener('change', function() {
       var file = this.files[0];
       var fileType = file.type;
-      var matches = fileType.match(/image\/(png|jpeg)/);
+      var matches = fileType.match(/image\/(png|jpeg|jpg)/);
 
       if (matches === null) {
         this.value = '';

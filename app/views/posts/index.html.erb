@@ -1,12 +1,13 @@
-<div class="d-flex align-items-center justify-content-between mb-3">
-  <h1 class="flex-shrink-0">新着投稿</h1>
-  <%= search_form_for @q, html: { class: 'flex-grow-1 d-flex align-items-center' } do |f| %>
-    <div class="d-flex align-items-center col-md-4"> 
-    <%= f.label :name_cont, 'キャラクター名検索', class: 'me-2', style: 'white-space: nowrap' %>
-    <%= f.search_field :name_cont, class: 'me-2 flex-grow-1' %>
-    <%= f.submit "検索", class: 'btn btn-primary ms-auto' %>
-  </div>  
-  <% end %>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+<div class="d-flex align-items-center justify-content-start mb-3">
+  <h1 class="page-title">新着投稿</h1>
+  <%= search_form_for @q, html: { class: 'd-flex align-items-center w-100' } do |f| %>
+    <%= f.label :name_cont, 'キャラクター名検索', class: 'me-2' %>
+    <%= f.search_field :name_cont, class: 'form-control character-search-field' %>
+    <%= f.submit "検索", class: 'search-button ms-2' %>
+  <% end %>  
 </div>
 <% if @posts.present? %>
   <div class="row">
@@ -15,13 +16,15 @@
       <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
         <div class="post">
           <div class="image-container">
-            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 10%;') %>
+            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 9%;') %>
             <div class="like-icon">
               <%= render partial: "posts/like", locals: { post: post } %>
             </div>
           </div>
           <h2 class="post-name"><%= post.name.truncate(11) %></h2>
-          <%= post.body.truncate(50) %>
+          <div class="post-body">
+            <%= simple_format(post.body) %>
+          </div>
         </div>
       <% end %>
     </div>

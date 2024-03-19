@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
   before_action :identity_verification, only: [:edit, :update]
-  layout 'no_sidebar', only: [:new]
   
   def new
     @user = User.new
@@ -9,10 +8,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_create_params)
+    @user.image = File.open(Rails.root.join('public', 'images', 'default_icon.png'))
+    @user.name = '推し大好き'
     if @user.save
       auto_login(@user)
       flash[:notice] = '新規登録に成功しました'
-      redirect_to new_user_path
+      redirect_to root_path
     else
       flash.now[:danger] = '新規登録に失敗しました'
       render :new
@@ -37,6 +38,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def default_icon_url
+    'https://oshikatsu-storage.s3.amazonaws.com/uploads/user/image/3/kkrn_icon_user_11.png'
+  end
 
   def user_create_params
     params.require(:user).permit(:email, :password, :password_confirmation)

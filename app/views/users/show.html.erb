@@ -9,7 +9,7 @@
   </div>
   <% if current_user == @user %>
     <div style="margin-left: auto; margin-right: 60px;">
-      <%= link_to 'ユーザー編集', edit_user_path(@user) %>
+      <%= link_to 'プロフィールを編集', edit_user_path(@user), class:'profile-edit-btn' %>
     </div>
   <% end %>
 </div><br>
