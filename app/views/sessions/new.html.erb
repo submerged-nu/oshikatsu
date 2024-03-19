@@ -3,13 +3,17 @@
 <% end %>
 <div class="form-container">
   <h1 class='form-title'>ログイン</h1>
-  <%= form_with url: sessions_path do |f| %>
-    <%= f.label :メールアドレス %><br>
-    <%= f.text_field :email %><br>
+  <%= form_with url: sessions_path, class: 'my-4' do |f| %>
+  <div class="form-group">
+    <%= f.label :メールアドレス, class: 'form-label' %>
+    <%= f.text_field :email, placeholder: 'oshikatsu@example.com', class: 'form-control mx-auto', style: 'width: 80%;' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :パスワード, class: 'form-label' %>
+    <%= f.password_field :password, placeholder: '半角英数8文字以上', class: 'form-control mx-auto', style: 'width: 80%;' %>
+  </div>
+  <%= f.submit '登録する', class: 'submit-button btn-primary' %>
+<% end %>
 
-    <%= f.label :パスワード %><br>
-    <%= f.password_field :password %><br>
-
-    <%= f.submit '登録する' %>
-  <% end %>
 </div>
