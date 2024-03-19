@@ -1,25 +1,55 @@
 .form-container {
   border: 1px solid #ccc;
-  padding: 20px;
-  width: 100%;
-  max-width: 400px;
-  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+  width: 550px;
+  margin: 170px auto;
   border-radius: 10px;
-  background: #fff;
+  background: #f9f9f9;
 }
 
 .flash-message {
   margin-bottom: 10px;
-}
-
-.login_and_user_registration {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
+  padding: 10px;
+  border-radius: 5px;
+  color: #333;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
 }
 
 .form-title {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 35px;
+}
+
+input.form-control,
+button.btn {
+  margin-bottom: 15px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.submit-button {
+  display: block;
+  width: 30%;
+  margin: 20px auto;
+  padding: 10px 0;
+  background-color: #646464;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #000000;
+}
+
+.form-label{
+  padding-left: 55px;
+  padding-top: 10px;
 }

@@ -7,20 +7,52 @@
   position: sticky;
   top: 0;
   z-index: 3;
-  border-bottom: 1px solid #ccc;
-  background-color: white;
+  border-bottom: 3px solid #ccc;
+  background-color: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-link {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.header-link:hover {
+  color: white;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.sidebar-link:hover {
+  color: rgb(255, 255, 255);
+}
+
+.sidebar-link i {
+  min-width: 25px;
+  text-align: center;
 }
 
 .sidebar {
   top: 50px;
   bottom: 50px;
   left: 0;
-  width: 150px;
+  width: 200px;
   height: calc(100vh - 50px);
-  background-color: #fff;
+  background-color: #000000;
   overflow-y: auto;
   z-index: 2;
   position: fixed;
+  border-right: 3px solid #ccc;
 }
 
 .sidebar a {
@@ -57,16 +89,6 @@
   aspect-ratio: 1 / 2;
 }
 
-.ranking-post{
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin: 5px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  width: 100%;
-}
-
 .image-container {
   position: relative;
 }
@@ -84,21 +106,38 @@
   border-radius: 20px;
 }
 
-
 .text-decoration-none {
   text-decoration: none;
   color: inherit;
 }
 
-.post-button{
-  text-align: right;
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.new-post {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.new-post a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.new-post a:hover {
+  text-decoration: none;
+  color: white;
 }
 
 .post-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 20px;
+  font-size: 14px;
   max-width: 100%;
 }
 
@@ -113,6 +152,7 @@
 }
 
 .user-icon {
+  display: inline-block;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -120,8 +160,6 @@
   outline: none;
 }
 
-.like_button{
-  padding-right: 15px
+.like_button {
+  padding-right: 15px;
 }
-
-
