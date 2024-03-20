@@ -20,10 +20,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-
-  def extension_whitelist
-    %w[jpg jpeg png]
+  def content_type_allowlist
+    [/image\/jpeg/, /image\/png/, /image\/jpg/]
   end
+  
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #

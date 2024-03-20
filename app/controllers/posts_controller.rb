@@ -8,14 +8,13 @@ class PostsController < ApplicationController
   def create
     character = Character.find_or_create_by(name: post_params[:name])
     @post = current_user.posts.build(post_params.except(:tags).merge(character_id: character.id))
-
     if @post.save
       process_tags(post_params[:tags])
       flash[:notice] = '投稿しました'
       render json: { redirect_url: posts_path }, status: :created
     else
-      flash.now[:danger] = '投稿に失敗しました'
-      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+     flash[:notice] = '画像は必須です'
+     render :new
     end
   end
 
