@@ -9,12 +9,6 @@
     <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", type: 'module', "data-turbo-track": "reload" %>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <% if controller_name == 'users' && action_name == 'edit' %>
-      <%= javascript_include_tag 'user_edit_croppie_setup', 'data-turbo-track': 'reload' %>
-      <%= javascript_include_tag 'render_user_edit_croppie_setup', 'data-turbo-track': 'reload' %>
-    <% elsif controller_name == 'posts' && action_name == 'new' %>
-      <%= javascript_include_tag 'new_post_croppie_setup', 'data-turbo-track': 'reload' %>
-    <% end %>
   </head>
   <body>
   <body>
@@ -29,5 +23,13 @@
   <div class="main-content">
     <%= yield %>
   </div>
+  <script src="https://kit.fontawesome.com/1d9654495b.js" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PX6267HM0"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0PX6267HM0');
+  </script>
   </body>
 </html>

@@ -1,4 +1,15 @@
 <div class="sidebar"><br><br>
+  <% unless logged_in? %>
+    <% if current_page?(root_path) %>
+      <%= link_to how_to_use_path, class: 'sidebar-link beginner new-badge' do %>
+        <i class="fa-solid fa-question"></i><span>使い方</span>
+      <% end %>
+    <% else %>
+      <%= link_to how_to_use_path, class: 'sidebar-link' do %>
+        <i class="fa-solid fa-question"></i><span>使い方</span>
+      <% end %>
+    <% end %>
+  <% end %>
   <%= link_to posts_path, class: 'sidebar-link' do %>
     <i class="fas fa-home"></i><span>新着</span>
   <% end %>
@@ -13,6 +24,11 @@
   <% end %>
   <%= link_to terms_of_service_path, class: 'sidebar-link' do %>
     <i class="fas fa-file-contract"></i><span>利用規約</span>
+  <% end %>
+  <% if logged_in? %>
+    <%= link_to how_to_use_path, class: 'sidebar-link' do %>
+      <i class="fa-solid fa-question"></i><span>使い方</span>
+    <% end %>
   <% end %>
   <% if logged_in? %>
     <%= link_to session_path(@current_user.id), data:{turbo_method: :delete}, class: 'sidebar-link' do %>

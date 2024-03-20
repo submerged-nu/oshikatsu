@@ -139,7 +139,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 16px;
+  font-size: 21px;
   max-width: 100%;
 }
 
@@ -288,5 +288,43 @@
 }
 
 .fa-trash{
+  font-size: 25px;
   padding-right: 20px;
+}
+
+.ranking-position{
+  font-size: 21px;
+}
+
+.modal-heart{
+  font-size: 25px;
+}
+
+.how_to_use h2{
+  font-size: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.how_to_use p{
+  color: #515151;
+  font-size: 20px;
+}
+
+.beginner {
+  animation: blinker 3.0s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.new-badge{
+  background-color: red;
+  color: white;
+  padding: 3px;
+  border-radius: 5px;
+  margin-left: 5px;
 }

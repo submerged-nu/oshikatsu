@@ -3,7 +3,7 @@
   <%= form_with model: @post, html: { multipart: true } do |f| %>
     <%= f.label :image, '推しの画像(png.jpg形式)', class: 'form-label' %><br>
     <div id='image-cropper'></div>
-    <%= f.file_field :image, class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+    <%= f.file_field :image, id: 'post-image-cropper', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
 
     <div class="form-group">
       <%= f.label :name, '推しの名前', class: 'form-label' %><br>

@@ -1,9 +1,9 @@
 document.addEventListener('turbo:load', function() {
   var cropperElement = document.getElementById('image-cropper');
-  var imageFileInput = document.querySelector('input[type=file]');
+  var imageFileInput = document.getElementById('post-image-cropper');
   var fileSelected = false;
 
-  if (cropperElement) {
+  if (cropperElement && imageFileInput) {
     var croppieInstance = new Croppie(cropperElement, {
       viewport: { width: 200, height: 200, type: 'square' },
       boundary: { width: 300, height: 300 }

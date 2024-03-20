@@ -1,9 +1,9 @@
 document.addEventListener('turbo:load', function() {
   var cropperElement = document.getElementById('image-cropper');
-  var imageFileInput = document.querySelector('input[type=file]');
+  var imageFileInput = document.getElementById('user-image-cropper');
   var fileSelected = false;
 
-  if (cropperElement) {
+  if (cropperElement && imageFileInput) {
     var croppieInstance = new Croppie(cropperElement, {
       viewport: { width: 200, height: 200, type: 'square' },
       boundary: { width: 300, height: 300 }
@@ -43,7 +43,9 @@ document.addEventListener('turbo:load', function() {
           quality: 1.0
         }).then(function(blob) {
           var formData = new FormData(this);
-          formData.append('post[image]', blob, 'cropped-image.jpeg');
+          formData.append('user[image]', blob, 'cropped-image.jpeg');
+          var userName = document.querySelector('#user-name').value;
+          formData.append('user[name], userName');
           submitForm(formData);
         });
       } else {
