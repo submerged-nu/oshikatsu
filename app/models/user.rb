@@ -10,12 +10,21 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }, if: :password_required?
   validates :password, confirmation: true, if: :password_required?
   #ユーザー編集の際のバリデーション
-  validates :name, presence: true, on: :update
-  validates :image, presence: true, on: :update
+  validate :name_length, on: :update
+  validate :name_present?, on: :update
 
   private
 
   def password_required?
     new_record? || password.present?
+  end
+
+  def name_length
+    return if name.blank?  
+    errors.add(:base, "名前は15文字以内にしてください") if name.length > 15
+  end
+
+  def name_present?
+    errors.add(:base, "名前は1文字以上入力してください") unless name.present?
   end
 end

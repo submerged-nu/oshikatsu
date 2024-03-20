@@ -32,8 +32,7 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー情報を更新しました。"
       redirect_to @user
     else
-      flash[:notice] = "ユーザー情報の更新に失敗しました。"
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

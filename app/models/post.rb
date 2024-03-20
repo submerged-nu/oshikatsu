@@ -18,7 +18,7 @@ class Post < ApplicationRecord
   end
 
   def name_length
-    if name.present? && name.length > 15
+    if name.length > 15
       errors.add(:base, "名前は最大15文字です")
     end
   end

@@ -1,5 +1,11 @@
-<% flash.each do |message_type, message| %>
-  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <div class='flash-message'><%= message %></div>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
 <div class="top-margin-short-form-container">
   <h1 class='form-title'>ユーザー編集</h1>
@@ -12,9 +18,9 @@
 
     <div class="form-group">
       <%= f.label :name, 'ユーザー名', class: 'form-label' %>
-      <%= f.text_field :name, placeholder: 'oshikatsu@example.com', class: 'form-control mx-auto', style: 'width: 80%;' %>
+      <%= f.text_field :name, placeholder: '15文字以内', class: 'form-control mx-auto', style: 'width: 80%;' %>
     </div>
 
-    <%= f.submit '変更する', class: 'submit-button btn-primary' %> <!-- 修正箇所 -->
+    <%= f.submit '変更する', class: 'submit-button btn-primary' %>
   <% end %>
 </div>

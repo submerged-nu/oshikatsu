@@ -4,7 +4,7 @@ document.addEventListener('turbo:load', function() {
   var fileSelected = false;
 
   if (cropperElement) {
-    croppieInstance = new Croppie(cropperElement, {
+    var croppieInstance = new Croppie(cropperElement, {
       viewport: { width: 200, height: 200, type: 'square' },
       boundary: { width: 300, height: 300 }
     });
@@ -42,7 +42,7 @@ document.addEventListener('turbo:load', function() {
           format: 'jpeg',
           quality: 1.0
         }).then(function(blob) {
-          var formData = new FormData();
+          var formData = new FormData(this);
           formData.append('post[image]', blob, 'cropped-image.jpeg');
           submitForm(formData);
         });
@@ -53,12 +53,7 @@ document.addEventListener('turbo:load', function() {
   }
 
   function submitForm(formData) {
-    formData.append('post[name]', document.getElementById('post_name').value);
-    formData.append('post[body]', document.getElementById('post_body').value);
-    var tagsElement = document.getElementById('post_tags');
-    if (tagsElement) {
-      formData.append('post[tags]', tagsElement.value);
-    }
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     fetch('/posts', {
       method: 'POST',
@@ -82,22 +77,5 @@ document.addEventListener('turbo:load', function() {
 
   function handleError(error) {
     console.error('Error:', error);
-  }
-
-  function displayErrors(errors) {
-    const existingErrors = document.querySelector('.flash-message');
-    if (existingErrors) {
-      existingErrors.remove();
-    }
-
-    const flashMessageContainer = document.createElement('div');
-    flashMessageContainer.classList.add('flash-message', 'danger');
-    errors.forEach((error) => {
-      const messageElement = document.createElement('div');
-      messageElement.textContent = error;
-      flashMessageContainer.appendChild(messageElement);
-    });
-    const headerElement = document.querySelector('h1');
-    headerElement.parentNode.insertBefore(flashMessageContainer, headerElement.nextSibling);
   }
 });
