@@ -1,4 +1,7 @@
-<div class="form-container">
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
+<div class="top-margin-short-form-container">
   <h1 class='form-title'>ユーザー編集</h1>
   <%= form_with model: @user, class: 'my-4' do |f| %>
     <div class="form-group"> 

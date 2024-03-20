@@ -7,9 +7,9 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      flash[:success] = 'コメントを投稿しました'
+      flash[:notice] = 'コメントを投稿しました'
     else
-      flash[:danger] = 'コメントは200文字以内にしてください'
+      flash[:notice] = 'コメントは200文字以内にしてください'
     end
     redirect_to root_path
   end

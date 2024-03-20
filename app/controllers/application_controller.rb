@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      flash[:alert] = 'ログインが必要な機能です'
+      flash[:notice] = 'ログインが必要な機能です'
       redirect_to new_session_path
     end
   end

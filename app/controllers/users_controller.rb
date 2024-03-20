@@ -29,10 +29,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_update_params)
-      flash[:success] = "ユーザー情報を更新しました。"
+      flash[:notice] = "ユーザー情報を更新しました。"
       redirect_to @user
     else
-      flash[:error] = "ユーザー情報の更新に失敗しました。"
+      flash[:notice] = "ユーザー情報の更新に失敗しました。"
       render :edit
     end
   end
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
 
   def identity_verification
     unless current_user == @user
-      flash[:alert] = "他のユーザーの編集は行えません"
+      flash[:notice] = "他のユーザーの編集は行えません"
     redirect_to(root_path)
     end
   end

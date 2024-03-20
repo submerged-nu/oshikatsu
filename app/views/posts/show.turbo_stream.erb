@@ -15,9 +15,15 @@
         <%= @post.user.name %>
       <% end %>
     </div>
-    <div class="modal-like-button">
-      <%= render 'posts/modal_like', post: @post %>
-    </div>
+    <% if current_user&.id == @post.user_id || current_user&.admin? %>
+      <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    <% else %>
+      <div class="modal-like-button">
+        <%= render 'posts/modal_like', post: @post %>
+      </div>
+    <% end %>
   </div>
   <%= form_with model: [@post, @comment], class: 'mt-3' do |f| %>
     <div class="mb-3" style="width: 96%; margin: 0 auto;">

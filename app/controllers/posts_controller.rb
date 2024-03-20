@@ -30,7 +30,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
-
+    @post = Post.find_by(id: params[:id])
+    @post.destroy
+    redirect_to root_path
+    flash[:notice] = '投稿を削除しました'
   end
 
   private

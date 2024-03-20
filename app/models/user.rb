@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :image, ImageUploader
+  enum role: { user: 0, admin: 1 }
   has_many :posts
   has_many :comments
   has_many :likes, dependent: :destroy
