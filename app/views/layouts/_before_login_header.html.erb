@@ -1,9 +1,10 @@
-<div class='header d-flex justify-content-between align-items-center' style='min-height: 70px;'>
+<div class='before-login-header d-flex justify-content-between align-items-center flex-wrap'>
   <div class='border-short'></div>
   <div class='logo'>
-    <h1>オシカツ！</h1>
+    <%= image_tag 'oshikatsu-logo.webp', style: 'border-radius: 50%; width: 50px; height: 50px;' %>
   </div>
-  <div class='right d-flex align-items-center'>
+  <h2 class='oshikatsu'>オシカツ！</h2>
+  <div class='d-flex align-items-center header-right'>
     <%= link_to 'ログイン', new_session_path, class: 'me-4 header-link' %>
     <%= link_to '新規登録', new_user_path, class: 'me-3 header-link' %>
   </div>
