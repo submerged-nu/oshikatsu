@@ -1,6 +1,6 @@
 document.addEventListener('turbo:load', function() {
-  var cropperElement = document.getElementById('image-cropper');
-  var imageFileInput = document.getElementById('user-image-cropper');
+  var cropperElement = document.getElementById('user-image-cropper');
+  var imageFileInput = document.getElementById('user-image-file-input');
   var fileSelected = false;
 
   if (cropperElement && imageFileInput) {
@@ -8,26 +8,23 @@ document.addEventListener('turbo:load', function() {
       viewport: { width: 200, height: 200, type: 'square' },
       boundary: { width: 300, height: 300 }
     });
-
     imageFileInput.addEventListener('change', function() {
       var file = this.files[0];
       if (file) {
-        fileSelected = true;
         var fileType = file.type;
         var matches = fileType.match(/image\/(png|jpeg|jpg)/);
 
         if (matches === null) {
-          this.value = '';
-          fileSelected = false;
-          displayErrors(['画像はpng, jpeg, jpg形式である必要があります']);
-          return;
+            this.value = '';
+            displayErrors(['画像はpng, jpeg, jpg形式である必要があります']);
+            return;
         }
 
         var reader = new FileReader();
         reader.onload = function(e) {
-          croppieInstance.bind({
-            url: e.target.result
-          });
+            croppieInstance.bind({
+                url: e.target.result
+            });
         };
         reader.readAsDataURL(file);
       }
@@ -42,10 +39,10 @@ document.addEventListener('turbo:load', function() {
           format: 'jpeg',
           quality: 1.0
         }).then(function(blob) {
-          var formData = new FormData(this);
+          var formData = new FormData(e.target);
           formData.append('user[image]', blob, 'cropped-image.jpeg');
-          var userName = document.querySelector('#user-name').value;
-          formData.append('user[name], userName');
+          var userName = document.querySelector('user-image-file-field').value;
+          formData.append('user[name]', userName);
           submitForm(formData);
         });
       } else {
@@ -57,8 +54,8 @@ document.addEventListener('turbo:load', function() {
   function submitForm(formData) {
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch('/posts', {
-      method: 'POST',
+    fetch('/users/1', {
+      method: 'PATCH',
       headers: {
         'X-CSRF-Token': csrfToken
       },

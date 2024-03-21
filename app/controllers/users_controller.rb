@@ -25,14 +25,18 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(30)
   end
   
-  def edit; end
+  def edit
+    @user = User.find_by(params[:id])
+  end
 
   def update
+    @user = User.find_by(params[:id])
+
     if @user.update(user_update_params)
       flash[:notice] = "ユーザー情報を更新しました。"
-      redirect_to @user
+      render json: { redirect_url: user_path(@user.id) }, status: :created
     else
-      render :edit, status: :unprocessable_entity
+      render json: { redirect_url: posts_path }, status: :created
     end
   end
 
@@ -57,7 +61,7 @@ class UsersController < ApplicationController
   def identity_verification
     unless current_user == @user
       flash[:notice] = "他のユーザーの編集は行えません"
-    redirect_to(root_path)
+      redirect_to(root_path)
     end
   end
 end

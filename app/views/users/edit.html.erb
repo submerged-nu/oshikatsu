@@ -10,13 +10,13 @@
 <div class="top-margin-short-form-container">
   <h1 class='form-title'>ユーザー編集</h1>
   <%= form_with model: @user, class: 'my-4' do |f| %>
-    <div class="form-group"> 
-      <div id='image-cropper'></div>
-      <%= f.label :image, 'アイコン', class: 'form-label' %>
-      <%= f.file_field :image, id: 'user-image-cropper', class: 'form-control mx-auto', style: 'width: 80%;' %>
+    <div class="form-group">
+      <div id='user-image-cropper'></div>
+      <%= f.label :image, 'アイコン', class: 'form-label', for: 'user-image-file-input' %>
+      <%= f.file_field :image, id: 'user-image-file-input', class: 'form-control mx-auto', style: 'width: 80%;' %>
     </div>
     <div class="form-group">
-      <%= f.label :name, 'ユーザー名', class: 'form-label' %>
+      <%= f.label :name, 'ユーザー名', class: 'form-label', for: 'user-name' %>
       <%= f.text_field :name, id: 'user-name', placeholder: '15文字以内', class: 'form-control mx-auto', style: 'width: 80%;' %>
     </div>
     <%= f.submit '変更する', class: 'submit-button btn-primary' %>

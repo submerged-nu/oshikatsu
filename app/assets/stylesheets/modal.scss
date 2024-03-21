@@ -20,7 +20,7 @@
   background-color: #fff !important;
   border-radius: 3% !important;
   max-width: 35%;
-  height: 600px;
+  height: 80%;
   overflow: auto;
   z-index: 3000;
   position: relative;
@@ -54,13 +54,14 @@
 
 .close-icon {
   position: fixed;
-  top: 8%;
-  right: 30%;
-  color: #ccc;
-  font-size: 50px;
+  top: 3%;
+  right: 28%;
+  color: #ffffff;
+  font-size: 70px;
   cursor: pointer;
   padding: 5px;
   pointer-events: none;
+  z-index: 6000;
 }
 
 .modal-user-name {

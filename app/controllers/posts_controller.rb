@@ -13,8 +13,7 @@ class PostsController < ApplicationController
       flash[:notice] = '投稿しました'
       render json: { redirect_url: posts_path }, status: :created
     else
-     flash[:notice] = '画像は必須です'
-     render :new
+      render json: { redirect_url: new_post_path }
     end
   end
 

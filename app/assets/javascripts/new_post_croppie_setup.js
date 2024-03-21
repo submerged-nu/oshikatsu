@@ -1,6 +1,6 @@
 document.addEventListener('turbo:load', function() {
   var cropperElement = document.getElementById('image-cropper');
-  var imageFileInput = document.getElementById('post-image-cropper');
+  var imageFileInput = document.getElementById('post-image-field');
   var fileSelected = false;
 
   if (cropperElement && imageFileInput) {
@@ -8,7 +8,6 @@ document.addEventListener('turbo:load', function() {
       viewport: { width: 200, height: 200, type: 'square' },
       boundary: { width: 300, height: 300 }
     });
-
     imageFileInput.addEventListener('change', function() {
       var file = this.files[0];
       if (file) {
@@ -24,12 +23,13 @@ document.addEventListener('turbo:load', function() {
         }
 
         var reader = new FileReader();
+        reader.readAsDataURL(file);
         reader.onload = function(e) {
+          console.log(e.target.result)
           croppieInstance.bind({
             url: e.target.result
           });
         };
-        reader.readAsDataURL(file);
       }
     });
 
@@ -44,6 +44,12 @@ document.addEventListener('turbo:load', function() {
         }).then(function(blob) {
           var formData = new FormData(this);
           formData.append('post[image]', blob, 'cropped-image.jpeg');
+          var postName = document.querySelector('#post_name').value;
+          formData.append('post[name]', postName);
+          var postBody = document.querySelector('#post_body').value;
+          formData.append('post[body]', postBody);
+          var postTags = document.querySelector('#post_tags').value;
+          formData.append('post[tags]', postTags);
           submitForm(formData);
         });
       } else {
