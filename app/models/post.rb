@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
   belongs_to :user
@@ -13,25 +15,25 @@ class Post < ApplicationRecord
 
   private
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["name"]
+  def self.ransackable_attributes(_auth_object = nil)
+    ['name']
   end
 
   def name_length
-    if name.length > 15
-      errors.add(:base, "名前は最大15文字です")
-    end
+    return unless name.length > 15
+
+    errors.add(:base, '名前は最大15文字です')
   end
 
   def name_present?
-    unless name.present?
-      errors.add(:base, "名前は必須です")
-    end
+    return if name.present?
+
+    errors.add(:base, '名前は必須です')
   end
 
   def image_present?
-    unless image.file.present?
-      errors.add(:base, '画像は必須です')
-    end
+    return if image.file.present?
+
+    errors.add(:base, '画像は必須です')
   end
 end

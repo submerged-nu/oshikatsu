@@ -1,3 +1,4 @@
+# このマイグレーションはlikesテーブルの作成のためのものです
 class CreateLikes < ActiveRecord::Migration[7.0]
   def change
     create_table :likes do |t|
@@ -7,6 +8,6 @@ class CreateLikes < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_index :likes, [:user_id, :post_id], unique: true
+    add_index :likes, %i[user_id post_id], unique: true
   end
 end
