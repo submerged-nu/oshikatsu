@@ -6,6 +6,7 @@ document.addEventListener('turbo:load', function() {
 
   if (cropperElement && userEditElement) {
      var croppieInstance = new Croppie(cropperElement, {
+      enableExif: true,
       viewport: { width: 250, height: 250, type: 'square' },
       boundary: { width: 300, height: 300 }
     });
@@ -15,7 +16,7 @@ document.addEventListener('turbo:load', function() {
       var reader = new FileReader();
       reader.onload = function(e) {
         croppieInstance.bind({
-          url: e.target.result  
+          url: event.target.result,
         });
         console.log(e.target.result)
       };
