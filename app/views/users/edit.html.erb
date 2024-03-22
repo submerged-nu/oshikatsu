@@ -1,12 +1,6 @@
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <div class='flash-message'><%= message %></div>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %><br>
 <div class="top-margin-short-form-container">
   <h1 class='form-title'>ユーザー編集</h1>
   <%= form_with model: @user, class: 'my-4' do |f| %>

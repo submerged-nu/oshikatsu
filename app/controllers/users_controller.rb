@@ -36,7 +36,8 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー情報を更新しました。"
       render json: { redirect_url: user_path(@user.id) }, status: :created
     else
-      render json: { redirect_url: posts_path }, status: :created
+      flash[:notice] = '名前は15文字以内にしてください'
+      render json: { redirect_url: edit_user_path(@user.id) }, status: :unprocessable_entity
     end
   end
 

@@ -55,7 +55,7 @@ document.addEventListener('turbo:load', function() {
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     fetch('/users/1', {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'X-CSRF-Token': csrfToken
       },
@@ -64,17 +64,5 @@ document.addEventListener('turbo:load', function() {
     .then(response => response.json())
     .then(handleResponse)
     .catch(handleError);
-  }
-
-  function handleResponse(data) {
-    if (data.redirect_url) {
-      window.location.href = data.redirect_url;
-    } else {
-      displayErrors(data.errors);
-    }
-  }
-
-  function handleError(error) {
-    console.error('Error:', error);
   }
 });
