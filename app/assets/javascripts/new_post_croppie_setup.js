@@ -1,24 +1,22 @@
 var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 document.addEventListener('turbo:load', function() {
-  var cropperElement = document.getElementById('image-cropper');
-  var userEditElement = document.getElementById('post-image-field')
+  const cropperElement = document.getElementById('image-cropper');
+  const  userEditElement = document.getElementById('post-image-field')
 
   if (cropperElement && userEditElement) {
-     var croppieInstance = new Croppie(cropperElement, {
+    const croppieInstance = new Croppie(cropperElement, {
       enableExif: true,
       viewport: { width: 250, height: 250, type: 'square' },
       boundary: { width: 300, height: 300 }
     });
 
     document.querySelector('input[type=file]').addEventListener('change', function() {
-      console.log('ファイルフィールドの変化を検知')
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = function(e) {
         croppieInstance.bind({
-          url: event.target.result,
+          url: e.target.result,
         });
-        console.log(e.target.result)
       };
       reader.readAsDataURL(this.files[0]);
     });
