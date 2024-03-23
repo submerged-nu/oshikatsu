@@ -1,20 +1,20 @@
-function initializeCropper() {
-  var dropArea = document.getElementById('drop-area');
-  var image = document.getElementById('image');
-  var input = document.getElementById('user-image-field');
-  var cropper;
-  var imageLoaded = false;
+var dropArea = document.getElementById('drop-area');
+var userImage = document.getElementById('image');
+var userImageInput = document.getElementById('user-image-field');
+var cropper;
+var imageLoaded = false;
 
-  if(input && image){
-    input.addEventListener('change', function (e) {
+if (userImage && userImageInput) {
+  function initializeCropper() {
+    userImageInput.addEventListener('change', function (e) {
       var files = e.target.files;
       var done = function (url) {
-        image.src = url;
-        image.style.display = 'block';
+        userImage.src = url;
+        userImage.style.display = 'block';
         if (cropper) {
           cropper.destroy();
         }
-        cropper = new Cropper(image, {
+        cropper = new Cropper(userImage, {
           aspectRatio: 1 / 1
         });
         deleteFileZone();
@@ -61,12 +61,12 @@ function initializeCropper() {
         if (!imageLoaded) {
           if (cropper) {
             cropper.destroy();
-            image.style.display = 'none';
-            image.removeAttribute('src');
+            userImage.style.display = 'none';
+            userImage.removeAttribute('src');
           }
-          image.src = reader.result;
-          image.style.display = 'block';
-          cropper = new Cropper(image, {
+          userImage.src = reader.result;
+          userImage.style.display = 'block';
+          cropper = new Cropper(userImage, {
             aspectRatio: 1 / 1
           });
           deleteFileZone();
@@ -84,19 +84,19 @@ function initializeCropper() {
 
     function submitCroppedImage() {
       var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-  
+
       cropper.getCroppedCanvas().toBlob(function (blob) {
         var formData = new FormData();
-        formData.append('post[image]', blob, 'cropped-image.jpeg');
-        formData.append('post[name]', document.getElementById('post_name').value);
-        formData.append('post[body]', document.getElementById('post_body').value);
-  
-        var tagsElement = document.getElementById('post_tags');
+        formData.append('user[image]', blob, 'cropped-image.jpeg');
+        formData.append('user[name]', document.getElementById('user-name').value);
+        formData.append('user[body]', document.getElementById('user-body').value);
+
+        var tagsElement = document.getElementById('user-tags');
         if (tagsElement) {
-          formData.append('post[tags]', tagsElement.value);
+          formData.append('user[tags]', tagsElement.value);
         }
-  
-        fetch('/posts', {
+
+        fetch('/users', {
           method: 'POST',
           headers: {
             'X-CSRF-Token': csrfToken
@@ -116,6 +116,7 @@ function initializeCropper() {
         });
       }, 'image/jpeg', 1.0);
     }
+
     document.querySelector('form').addEventListener('submit', function(e) {
       e.preventDefault();
       if (imageLoaded) {
@@ -123,7 +124,7 @@ function initializeCropper() {
       }
     });
   }
-}
 
-document.addEventListener('turbo:load', initializeCropper);
-document.addEventListener('DOMContentLoaded', initializeCropper);
+  document.addEventListener('turbo:load', initializeCropper);
+  document.addEventListener('DOMContentLoaded', initializeCropper);
+}
