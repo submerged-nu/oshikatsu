@@ -367,3 +367,27 @@
   margin-left: 0;
   padding-left: 0;
 }
+
+.cropper-height-limit{
+  height: 300px;
+}
+
+.file-drop-zone-border{
+  border: 3px solid #ccc;
+  border-radius: 20px;
+  color: #525252;
+  height: 300px;
+  width: 440px;
+  margin: auto;
+}
+
+.file-drop-zone-text{
+  color: #868686;
+  margin-top: 130px;
+  font-size: 25px;
+  text-align:center;
+}
+
+.post-image-field{
+  display:none;
+}
