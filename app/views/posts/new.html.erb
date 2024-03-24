@@ -5,12 +5,12 @@
     <div class='cropper-height-limit' id="drop-area">
       <div class='file-drop-zone'>
         <div class='file-drop-zone-border'>
-          <p class='file-drop-zone-text'>画像ファイルをドラッグ＆ドロップ</p>
+          <p class='file-drop-zone-text'>画像を選択してください</p>
         </div>
       </div>
       <img id="image" src="" style="display: none;">
-    </div><br>
-    <%= f.file_field :image, id: 'post-image-field', class: 'form-control mx-auto', style: 'display: none;' %><br>
+    </div><br><br>
+    <%= f.file_field :image, id: 'post-image-field', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
 
     <div class="form-group">
       <%= f.label :name, '推しの名前', class: 'form-label' %><br>

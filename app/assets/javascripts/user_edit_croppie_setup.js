@@ -1,23 +1,22 @@
-var dropArea = document.getElementById('drop-area');
-var userImage = document.getElementById('image');
-var userImageInput = document.getElementById('user-image-field');
+var postImage = document.getElementById('image');
+var postImageInput = document.getElementById('post-image-field');
+var fileDropZone = document.querySelector('.file-drop-zone');
 var cropper;
 var imageLoaded = false;
 
-if (userImage && userImageInput) {
+if (postImage && postImageInput) {
   function initializeCropper() {
-    userImageInput.addEventListener('change', function (e) {
+    postImageInput.addEventListener('change', function (e) {
       var files = e.target.files;
       var done = function (url) {
-        userImage.src = url;
-        userImage.style.display = 'block';
+        postImage.src = url;
+        postImage.style.display = 'block';
         if (cropper) {
           cropper.destroy();
         }
-        cropper = new Cropper(userImage, {
+        cropper = new Cropper(postImage, {
           aspectRatio: 1 / 1
         });
-        deleteFileZone();
         imageLoaded = true;
       };
 
@@ -27,76 +26,26 @@ if (userImage && userImageInput) {
           done(e.target.result);
         };
         reader.readAsDataURL(files[0]);
+
+        // Update the file drop zone with the file name
+        fileDropZone.textContent = files[0].name;
       }
     });
+  }
 
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      dropArea.addEventListener(eventName, preventDefaults, false);
-    });
+  document.addEventListener('turbo:load', initializeCropper);
+  document.addEventListener('DOMContentLoaded', initializeCropper);
 
-    function preventDefaults(e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    dropArea.addEventListener('drop', handleDrop, false);
-
-    function handleDrop(e) {
-      if (!imageLoaded) {
-        var dt = e.dataTransfer;
-        var files = dt.files;
-        handleFiles(files);
-      }
-    }
-
-    function handleFiles(files) {
-      files = [...files];
-      files.forEach(previewFile);
-    }
-
-    function previewFile(file) {
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = function () {
-        if (!imageLoaded) {
-          if (cropper) {
-            cropper.destroy();
-            userImage.style.display = 'none';
-            userImage.removeAttribute('src');
-          }
-          userImage.src = reader.result;
-          userImage.style.display = 'block';
-          cropper = new Cropper(userImage, {
-            aspectRatio: 1 / 1
-          });
-          deleteFileZone();
-          imageLoaded = true;
-        }
-      };
-    }
-
-    function deleteFileZone() {
-      var fileDropZone = document.querySelector('.file-drop-zone');
-      if (fileDropZone) {
-        fileDropZone.remove();
-      }
-    }
-
-    function submitCroppedImage() {
+  function submitCroppedImage(e) {
+    e.preventDefault();
+    if (imageLoaded) {
       var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
       cropper.getCroppedCanvas().toBlob(function (blob) {
-        var formData = new FormData();
-        formData.append('user[image]', blob, 'cropped-image.jpeg');
-        formData.append('user[name]', document.getElementById('user-name').value);
-        formData.append('user[body]', document.getElementById('user-body').value);
+        var formData = new FormData(e.target);
+        formData.append('post[image]', blob, 'cropped-image.jpeg');
 
-        var tagsElement = document.getElementById('user-tags');
-        if (tagsElement) {
-          formData.append('user[tags]', tagsElement.value);
-        }
-
-        fetch('/users', {
+        fetch('/posts', {
           method: 'POST',
           headers: {
             'X-CSRF-Token': csrfToken
@@ -116,15 +65,7 @@ if (userImage && userImageInput) {
         });
       }, 'image/jpeg', 1.0);
     }
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (imageLoaded) {
-        submitCroppedImage();
-      }
-    });
   }
 
-  document.addEventListener('turbo:load', initializeCropper);
-  document.addEventListener('DOMContentLoaded', initializeCropper);
+  document.querySelector('form').addEventListener('submit', submitCroppedImage);
 }

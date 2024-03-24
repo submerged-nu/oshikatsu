@@ -5,6 +5,14 @@
   <h1 class='form-title'>ユーザー編集</h1>
   <%= form_with model: @user, class: 'my-4' do |f| %>
       <%= f.label :image, 'アイコン', class: 'form-label', for: 'user-image-file-input' %>
+      <div class='cropper-height-limit' id="drop-area">
+        <div class='file-drop-zone'>
+          <div class='file-drop-zone-border'>
+            <p class='file-drop-zone-text'>画像ファイルをドラッグ＆ドロップ</p>
+          </div>
+        </div>
+      <img id="image" src="" style="display: none;">
+    </div><br><br>
       <%= f.file_field :image, id: 'user-image-field', class: 'form-control mx-auto', style: 'width: 80%;' %>
     <div class="form-group">
       <%= f.label :name, 'ユーザー名', class: 'form-label', for: 'user-name' %>

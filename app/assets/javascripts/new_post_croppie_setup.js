@@ -1,87 +1,88 @@
-document.addEventListener('turbo:load', function() {
-  var cropperElement = document.getElementById('image-cropper');
-  var imageFileInput = document.getElementById('post-image-field');
-  var fileSelected = false;
+var postImage = document.getElementById('image');
+var postImageInput = document.getElementById('post-image-field');
+var fileDropZone = document.querySelector('.file-drop-zone');
+var cropper;
+var imageLoaded = false;
 
-  if (cropperElement && imageFileInput) {
-    var croppieInstance = new Croppie(cropperElement, {
-      viewport: { width: 200, height: 200, type: 'square' },
-      boundary: { width: 300, height: 300 }
-    });
-    imageFileInput.addEventListener('change', function() {
-      var file = this.files[0];
-      if (file) {
-        fileSelected = true;
-        var fileType = file.type;
-        var matches = fileType.match(/image\/(png|jpeg|jpg)/);
+if(postImage){
+  console.log('postImageは存在')
+}
 
-        if (matches === null) {
-          this.value = '';
-          fileSelected = false;
-          displayErrors(['画像はpng, jpeg, jpg形式である必要があります']);
-          return;
+if (postImageInput){
+  console.log('postImageInputは存在')
+}
+
+
+if (postImage && postImageInput) {
+  console.log('条件式通った')
+  function initializeCropper() {
+    postImageInput.addEventListener('change', function (e) {
+      console.log('変更を検知')
+      var files = e.target.files;
+      var done = function (url) {
+        postImage.src = url;
+        postImage.style.display = 'block';
+        if (cropper) {
+          cropper.destroy();
         }
-
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function(e) {
-          console.log(e.target.result)
-          croppieInstance.bind({
-            url: e.target.result
-          });
-        };
-      }
-    });
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      if (fileSelected) {
-        croppieInstance.result({
-          type: 'blob',
-          format: 'jpeg',
-          quality: 1.0
-        }).then(function(blob) {
-          var formData = new FormData(this);
-          formData.append('post[image]', blob, 'cropped-image.jpeg');
-          var postName = document.querySelector('#post_name').value;
-          formData.append('post[name]', postName);
-          var postBody = document.querySelector('#post_body').value;
-          formData.append('post[body]', postBody);
-          var postTags = document.querySelector('#post_tags').value;
-          formData.append('post[tags]', postTags);
-          submitForm(formData);
+        cropper = new Cropper(postImage, {
+          aspectRatio: 1 / 1
         });
-      } else {
-        submitForm(new FormData(this));
+        imageLoaded = true;
+      };
+
+      if (files && files.length > 0) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          done(e.target.result);
+        };
+        reader.readAsDataURL(files[0]);
+
+        fileDropZone.textContent = files[0].name;
       }
     });
   }
+  document.addEventListener('turbo:load', initializeCropper);
+  document.addEventListener('turbo:visit', initializeCropper);
+  document.addEventListener('turbo:render', initializeCropper);
+  document.addEventListener('DOMContentLoaded', initializeCropper);
 
-  function submitForm(formData) {
-    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  function submitCroppedImage(e) {
+    e.preventDefault();
+    if (imageLoaded) {
+      var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-    fetch('/posts', {
-      method: 'POST',
-      headers: {
-        'X-CSRF-Token': csrfToken
-      },
-      body: formData
-    })
-    .then(response => response.json())
-    .then(handleResponse)
-    .catch(handleError);
-  }
+      cropper.getCroppedCanvas().toBlob(function (blob) {
+        var formData = new FormData(e.target);
+        var postName = document.querySelector('.post_name').value;
+        var postBody = document.querySelector('.post_body').value;
+        var postTags = document.querySelector('.post_tags').value;
+        formData.append('post[image]', blob, 'cropped-image.jpeg');
+        formData.append('post[name]', postName);
+        formData.append('post[body]', postBody);
+        formData.append('post[tags]', postTags);
 
-  function handleResponse(data) {
-    if (data.redirect_url) {
-      window.location.href = data.redirect_url;
-    } else {
-      displayErrors(data.errors);
+        fetch('/posts', {
+          method: 'POST',
+          headers: {
+            'X-CSRF-Token': csrfToken
+          },
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+          } else {
+            console.error('Form submission error');
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      }, 'image/jpeg', 1.0);
     }
   }
 
-  function handleError(error) {
-    console.error('Error:', error);
-  }
-});
+  document.querySelector('form').addEventListener('submit', submitCroppedImage);
+}
