@@ -1,3 +1,6 @@
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %>
 <div class="top-margin-short-form-container">
   <h1 class='form-title'>新規投稿</h1>
   <%= form_with model: @post, html: { multipart: true } do |f| %>
@@ -30,3 +33,13 @@
     <%= f.submit '投稿する', class: 'submit-button btn-primary' %>
   <% end %>
 </div>
+
+<script>
+  if (!sessionStorage.getItem('reloaded')) {
+    sessionStorage.setItem('reloaded', 'true');
+    window.location.reload();
+  } else {
+    sessionStorage.removeItem('reloaded');
+  }
+</script>
+

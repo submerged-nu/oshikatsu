@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     if @post.save
       post_success_action
     else
+      flash[:notice] = "新規投稿は '画像必須' '名前は1~15文字' '推しへの愛を語るところは1000文字以内' です"
       render json: { redirect_url: new_post_path }
     end
   end
@@ -51,6 +52,6 @@ class PostsController < ApplicationController
   def post_success_action
     process_tags(post_params[:tags])
     flash[:notice] = '投稿しました'
-    render json: { redirect_url: posts_path }, status: :created
+    render json: { redirect_url: posts_path }
   end
 end

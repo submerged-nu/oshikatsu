@@ -3,12 +3,12 @@
 <% end %><br>
 <div class="top-margin-short-form-container">
   <h1 class='form-title'>ユーザー編集</h1>
-  <%= form_with model: @user, class: 'my-4' do |f| %>
+  <%= form_with model: @user, class: 'my-4', data: { user_id: @user.id } do |f| %>
       <%= f.label :image, 'アイコン', class: 'form-label', for: 'user-image-file-input' %>
       <div class='cropper-height-limit' id="drop-area">
         <div class='file-drop-zone'>
           <div class='file-drop-zone-border'>
-            <p class='file-drop-zone-text'>画像ファイルをドラッグ＆ドロップ</p>
+            <p class='file-drop-zone-text'>画像ファイルを選択してください</p>
           </div>
         </div>
       <img id="image" src="" style="display: none;">
@@ -21,3 +21,12 @@
     <%= f.submit '変更する', class: 'submit-button btn-primary' %>
   <% end %>
 </div>
+
+<script>
+  if (!sessionStorage.getItem('reloaded')) {
+    sessionStorage.setItem('reloaded', 'true');
+    window.location.reload();
+  } else {
+    sessionStorage.removeItem('reloaded');
+  }
+</script>

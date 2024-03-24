@@ -4,20 +4,9 @@ var fileDropZone = document.querySelector('.file-drop-zone');
 var cropper;
 var imageLoaded = false;
 
-if(postImage){
-  console.log('postImageは存在')
-}
-
-if (postImageInput){
-  console.log('postImageInputは存在')
-}
-
-
 if (postImage && postImageInput) {
-  console.log('条件式通った')
   function initializeCropper() {
     postImageInput.addEventListener('change', function (e) {
-      console.log('変更を検知')
       var files = e.target.files;
       var done = function (url) {
         postImage.src = url;
@@ -49,40 +38,38 @@ if (postImage && postImageInput) {
 
   function submitCroppedImage(e) {
     e.preventDefault();
-    if (imageLoaded) {
-      var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+    var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
-      cropper.getCroppedCanvas().toBlob(function (blob) {
+    cropper.getCroppedCanvas().toBlob(function (blob) {
         var formData = new FormData(e.target);
-        var postName = document.querySelector('.post_name').value;
-        var postBody = document.querySelector('.post_body').value;
-        var postTags = document.querySelector('.post_tags').value;
+        var postName = document.querySelector('#post_name').value;
+        var postBody = document.querySelector('#post_body').value;
+        var postTags = document.querySelector('#post_tags').value;
         formData.append('post[image]', blob, 'cropped-image.jpeg');
         formData.append('post[name]', postName);
         formData.append('post[body]', postBody);
         formData.append('post[tags]', postTags);
 
         fetch('/posts', {
-          method: 'POST',
-          headers: {
-            'X-CSRF-Token': csrfToken
-          },
-          body: formData
+            method: 'POST',
+            headers: {
+                'X-CSRF-Token': csrfToken
+            },
+            body: formData
         })
         .then(response => response.json())
         .then(data => {
-          if (data.redirect_url) {
-            window.location.href = data.redirect_url;
-          } else {
-            console.error('Form submission error');
-          }
+            if (data.redirect_url) {
+                window.location.href = data.redirect_url;
+            } else {
+                console.error('Form submission error');
+            }
         })
         .catch((error) => {
-          console.error('Error:', error);
+            console.error('Error:', error);
         });
-      }, 'image/jpeg', 1.0);
-    }
-  }
+    }, 'image/jpeg', 1.0);
+}
 
   document.querySelector('form').addEventListener('submit', submitCroppedImage);
 }
