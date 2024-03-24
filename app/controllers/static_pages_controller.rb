@@ -1,8 +1,9 @@
-class StaticPagesController < ApplicationController
-  layout :false
-  def privacy_policy
-  end
+# frozen_string_literal: true
 
-  def terms_of_service
-  end
+class StaticPagesController < ApplicationController
+  def privacy_policy; end
+
+  def terms_of_service; end
+
+  def how_to_use; end
 end

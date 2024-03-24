@@ -1,11 +1,11 @@
 <div id='modal-like-<%= post.id %>'>
   <% if current_user&.likes&.exists?(post: post) %>
     <%= link_to like_path(post), data: {turbo_method: :delete}, class: 'text-decoration-none' do %>
-      <i class="fa-solid fa-heart heart-icon fa-lg"></i>
+      <i class="fa-solid fa-heart heart-icon fa-lg modal-heart"></i>
     <% end %>
   <% else %>
     <%= link_to likes_path(post_id: post.id), data: {turbo_method: :post}, class: 'text-decoration-none' do %>
-      <i class="fa-regular fa-heart heart-icon fa-lg"></i>
+      <i class="fa-regular fa-heart heart-icon fa-lg modal-heart"></i>
     <% end %>
   <% end %>
 </div>

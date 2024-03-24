@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :require_login, only: [:new, :create, :destroy]
+  before_action :require_login, only: %i[new create destroy]
 
   def new
     @post = Post.new
@@ -8,14 +10,11 @@ class PostsController < ApplicationController
   def create
     character = Character.find_or_create_by(name: post_params[:name])
     @post = current_user.posts.build(post_params.except(:tags).merge(character_id: character.id))
-
     if @post.save
-      process_tags(post_params[:tags])
-      flash[:notice] = '投稿しました'
-      render json: { redirect_url: posts_path }, status: :created
+      post_success_action
     else
-      flash.now[:danger] = '投稿に失敗しました'
-      render :new
+      flash[:notice] = "新規投稿は '画像必須' '名前は1~15文字' '推しへの愛を語るところは1000文字以内' です"
+      render json: { redirect_url: new_post_path }
     end
   end
 
@@ -26,11 +25,15 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.order(created_at: :desc)
     @comment = Comment.new
   end
 
   def destroy
-
+    @post = Post.find_by(id: params[:id])
+    @post.destroy
+    redirect_to root_path
+    flash[:notice] = '投稿を削除しました'
   end
 
   private
@@ -44,5 +47,11 @@ class PostsController < ApplicationController
       tag = Tag.find_or_create_by(name: tag_name.strip)
       @post.tags << tag unless @post.tags.include?(tag)
     end
+  end
+
+  def post_success_action
+    process_tags(post_params[:tags])
+    flash[:notice] = '投稿しました'
+    render json: { redirect_url: posts_path }
   end
 end

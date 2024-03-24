@@ -1,37 +1,54 @@
 <div class='modal-overlay'>
+<div class="close-icon">&times;</div>
 <div class='modal-content'>
-  <%= image_tag @post.image.url, class: 'modal_post_image' %>
-  <h2><%= @post.name %></h2>
-  <p><%= @post.body %></p>
+  <%= image_tag @post.image.url, class: 'modal-post-image' %>
+  <h2 class='modal-post-name'><%= @post.name %></h2>
+  <div class="modal-post-body">
+    <%= @post.body %>
+  </div>
   <div class="post-interaction-container">
     <div class="post-user">
       <%= link_to user_path(@post.user), class: 'btn btn-link' do %>
         <%= image_tag @post.user.image.url, class: 'user-icon' %>
       <% end %>
-      <%= link_to user_path(@post.user), class: 'btn btn-link' do %>
+      <%= link_to user_path(@post.user), class: 'modal-user-name' do %>
         <%= @post.user.name %>
       <% end %>
     </div>
-    <div class="like-button">
-      <%= render 'posts/modal_like', post: @post %>
-    </div>
-  </div>
-  <%= form_with model: [@post, @comment], class: 'mt-3' do |f| %>
-  <div class="mb-3">
-    <%= f.text_area :body, class: 'form-control', placeholder: 'コメントを入力...' %>
-  </div>
-  <%= f.submit 'コメントする', class: 'btn btn-primary' %>
-  <% end %>
-    <div id="comments" class="mt-4">
-    <% @post.comments.each do |comment| %>
-      <div class="mb-2">
-        <strong><%= comment.user.name %>:</strong>
-        <p><%= comment.body %></p>
-        <% if comment.user == current_user %>
-          <%= link_to '削除', [comment.post, comment], method: :delete, class: 'btn btn-danger btn-sm' %>
-        <% end %>
+    <% if current_user&.id == @post.user_id || current_user&.admin? %>
+      <%= link_to post_path(@post.id), data: { turbo_method: :delete } do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    <% else %>
+      <div class="modal-like-button">
+        <%= render 'posts/modal_like', post: @post %>
       </div>
     <% end %>
   </div>
-</div>
+  <%= form_with model: [@post, @comment], class: 'mt-3' do |f| %>
+    <div class="mb-3" style="width: 96%; margin: 0 auto;">
+      <%= f.text_area :body, class: 'form-control', placeholder: 'コメントを入力...' %>
+    </div>
+  <%= f.submit 'コメントする', class: 'submit-button btn-primary' %>
+  <% end %>
+    <div id="comments" class="mt-4">
+    <% @comments.each do |comment| %>
+      <div class='comment'>
+        <div class='comment-user'>
+          <%= link_to user_path(comment.user), class: 'comment-user-link' do %>
+            <%= image_tag comment.user.image.url, class: 'comment-user-icon' %>
+          <% end %>
+          <div class='comment-details'>
+            <div class='comment-user-name'>
+              <%= comment.user.name %>
+            </div>
+            <div class='comment-body'>
+              <%= comment.body %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>       
+    </div>
+  </div>
 </div>

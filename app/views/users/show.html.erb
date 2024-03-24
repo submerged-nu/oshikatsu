@@ -1,3 +1,6 @@
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %><br>
 <div class="d-flex align-items-center justify-content-start" style="margin-top: -10px;">
   <% if @user.image.url %>
     <div style="margin-right: 30px;">
@@ -7,10 +10,13 @@
   <div style="flex-grow: 1; min-width: 0;">
     <p style="margin: 0; font-size: 20px;"><%= @user.name %>さんの推し一覧</p>
   </div>
+  <% if current_user.id == @user.id %>
+    <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_url(@user))}", target: '_blank', class: 'btn btn-twitter' do %>
+      <i class="fa-brands fa-x-twitter"></i>
+    <% end %>
+  <% end %>
   <% if current_user == @user %>
-    <div style="margin-left: auto; margin-right: 60px;">
-      <%= link_to 'ユーザー編集', edit_user_path(@user) %>
-    </div>
+    <%= link_to 'プロフィールを編集', edit_user_path(@user), class:'profile-edit-btn' %>
   <% end %>
 </div><br>
 <% if @posts.present? %>

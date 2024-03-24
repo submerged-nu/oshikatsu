@@ -1,10 +1,32 @@
-<h1>ユーザー編集</h1>
-<%= form_with model: @user do |f| %>
-  <%= f.label :name, 'ユーザー名' %><br>
-  <%= f.text_field :name %><br>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
+<% end %><br>
+<div class="top-margin-short-form-container">
+  <h1 class='form-title'>ユーザー編集</h1>
+  <%= form_with model: @user, class: 'my-4', data: { user_id: @user.id } do |f| %>
+      <%= f.label :image, 'アイコン', class: 'form-label', for: 'user-image-file-input' %>
+      <div class='cropper-height-limit' id="drop-area">
+        <div class='file-drop-zone'>
+          <div class='file-drop-zone-border'>
+            <p class='file-drop-zone-text'>画像ファイルを選択してください</p>
+          </div>
+        </div>
+      <img id="image" src="" style="display: none;">
+    </div><br><br>
+      <%= f.file_field :image, id: 'user-image-field', class: 'form-control mx-auto', style: 'width: 80%;' %>
+    <div class="form-group">
+      <%= f.label :name, 'ユーザー名', class: 'form-label', for: 'user-name' %>
+      <%= f.text_field :name, id: 'user-name', placeholder: '15文字以内', class: 'form-control mx-auto', style: 'width: 80%;' %>
+    </div>
+    <%= f.submit '変更する', class: 'submit-button btn-primary' %>
+  <% end %>
+</div>
 
-  <%= f.label :image, 'アイコン' %><br>
-  <%= f.file_field :image %><br>
-  <br>
-  <%= f.submit '変更する' %>
-<% end %>
+<script>
+  if (!sessionStorage.getItem('reloaded')) {
+    sessionStorage.setItem('reloaded', 'true');
+    window.location.reload();
+  } else {
+    sessionStorage.removeItem('reloaded');
+  }
+</script>

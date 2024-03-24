@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -20,10 +22,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-
-  def extension_whitelist
-    %w[jpg jpeg png]
+  def content_type_allowlist
+    [%r{image/jpeg}, %r{image/png}, %r{image/jpg}]
   end
+
   # Process files as they are uploaded:
   # process scale: [200, 300]
   #
@@ -31,6 +33,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  def default_url(*_args)
+    'https://oshikatsu-storage.s3.amazonaws.com/uploads/user/image/3/kkrn_icon_user_11.png'
+  end
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]

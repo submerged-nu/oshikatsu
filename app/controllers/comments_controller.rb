@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :require_login
   before_action :set_post
@@ -6,13 +8,12 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
-    if @comment.save
-      flash[:success] = 'コメントを投稿しました'
-      redirect_to root_path
-    else
-      flash[:danger].now = 'コメント投稿に失敗しました'
-      render :new
-    end
+    flash[:notice] = if @comment.save
+                       'コメントを投稿しました'
+                     else
+                       'コメントは200文字以内にしてください'
+                     end
+    redirect_to root_path
   end
 
   def destroy

@@ -1,17 +1,37 @@
-<h1>新規投稿</h1>
-<div id="image-cropper"></div>
-<%= form_with model: @post, html: { multipart: true } do |f| %>
-  <%= f.label :image, '推しの画像(png.jpg形式)' %><br>
-  <%= f.file_field :image %><br>
-
-  <%= f.label :name, '推しの名前' %><br>
-  <%= f.text_field :name %><br>
-
-  <%= f.label :body, '推しへの愛を語るところ' %><br>
-  <%= f.text_area :body %><br>
-
-  <%= f.label :tags, "タグ (カンマ区切りで入力)" %><br>
-  <%= f.text_field :tags, value: @post.tags.map(&:name).join(", ") %><br>
-
-  <%= f.submit '投稿する' %>
+<% flash.each do |message_type, message| %>
+  <div class="flash-message <%= message_type %>"><%= message %></div>
 <% end %>
+<div class="top-margin-short-form-container">
+  <h1 class='form-title'>新規投稿</h1>
+  <%= form_with model: @post, html: { multipart: true } do |f| %>
+    <%= f.label :image, '推しの画像(必須)', class: 'form-label' %><br>
+    <div class='cropper-height-limit' id="drop-area">
+      <div class='file-drop-zone'>
+        <div class='file-drop-zone-border'>
+          <p class='file-drop-zone-text'>png,jpg画像を選択してください</p>
+        </div>
+      </div>
+      <img id="image" src="" style="display: none;">
+    </div><br><br>
+    <%= f.file_field :image, id: 'post-image-field', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+
+    <div class="form-group">
+      <%= f.label :name, '推しの名前(必須)', class: 'form-label' %><br>
+      <%= f.text_field :name, placeholder: '15文字以内(必須)', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :body, '推しへの愛を語るところ', class: 'form-label' %><br>
+      <%= f.text_area :body, placeholder: '1000字以内', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :tags, "タグ (カンマ区切りで入力)", class: 'form-label' %><br>
+      <%= f.text_field :tags, value: @post.tags.map(&:name).join(", "), placeholder: '推しの特徴など', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+    </div>
+
+    <%= f.submit '投稿する', class: 'submit-button btn-primary' %>
+  <% end %>
+</div>
+
+
