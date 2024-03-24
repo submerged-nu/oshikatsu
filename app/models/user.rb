@@ -13,7 +13,6 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: :password_required?
   # ユーザー編集の際のバリデーション
   validate :name_length, on: :update
-  validate :name_present?, on: :update
 
   private
 

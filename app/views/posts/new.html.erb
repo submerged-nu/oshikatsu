@@ -4,11 +4,11 @@
 <div class="top-margin-short-form-container">
   <h1 class='form-title'>新規投稿</h1>
   <%= form_with model: @post, html: { multipart: true } do |f| %>
-    <%= f.label :image, '推しの画像(png.jpg形式)', class: 'form-label' %><br>
+    <%= f.label :image, '推しの画像(必須)', class: 'form-label' %><br>
     <div class='cropper-height-limit' id="drop-area">
       <div class='file-drop-zone'>
         <div class='file-drop-zone-border'>
-          <p class='file-drop-zone-text'>画像を選択してください</p>
+          <p class='file-drop-zone-text'>png,jpg画像を選択してください</p>
         </div>
       </div>
       <img id="image" src="" style="display: none;">
@@ -16,7 +16,7 @@
     <%= f.file_field :image, id: 'post-image-field', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
 
     <div class="form-group">
-      <%= f.label :name, '推しの名前', class: 'form-label' %><br>
+      <%= f.label :name, '推しの名前(必須)', class: 'form-label' %><br>
       <%= f.text_field :name, placeholder: '15文字以内(必須)', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
     </div>
 
@@ -34,12 +34,4 @@
   <% end %>
 </div>
 
-<script>
-  if (!sessionStorage.getItem('reloaded')) {
-    sessionStorage.setItem('reloaded', 'true');
-    window.location.reload();
-  } else {
-    sessionStorage.removeItem('reloaded');
-  }
-</script>
 
