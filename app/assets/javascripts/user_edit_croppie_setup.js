@@ -72,3 +72,4 @@ if (userImage && userImageInput) {
 
   document.querySelector('form').addEventListener('submit', submitCroppedImage);
 }
+//コミット用コメント
