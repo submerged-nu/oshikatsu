@@ -35,25 +35,24 @@ if (userImage && userImageInput) {
   function submitCroppedImage(e) {
     e.preventDefault();
 
-    var userId = e.target.getAttribute('data-user-id'); // Ensure this is correct or use a different way to get userId
+    var userId = e.target.getAttribute('data-user-id');
     var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-    var actionUrl = `/users/${userId}`;
     var formData = new FormData(e.target);
     var userName = document.getElementById('user-name').value;
     formData.append('user[name]', userName);
 
-    if (imageLoaded && cropper) {
+    if (cropper) {
       cropper.getCroppedCanvas().toBlob(function (blob) {
         formData.append('user[image]', blob, 'cropped-image.jpeg');
-        sendFormData(actionUrl, csrfToken, formData);
+        sendFormData(userId, csrfToken, formData);
       }, 'image/jpeg', 1.0);
-    } else {
-      sendFormData(actionUrl, csrfToken, formData);
     }
   }
 
-  function sendFormData(actionUrl, csrfToken, formData) {
-    fetch(actionUrl, {
+  function sendFormData(userId, csrfToken, formData) {
+    var actionUrl = `http://localhost:3000/users/${userId}`;
+    console.log(actionUrl)
+    fetch(`http://localhost:3000/users/2`, {
         method: 'PATCH',
         headers: {
             'X-CSRF-Token': csrfToken

@@ -25,12 +25,9 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(30)
   end
 
-  def edit
-    @user = User.find_by(params[:id])
-  end
+  def edit; end
 
   def update
-    @user = User.find_by(params[:id])
 
     if @user.update(user_update_params)
       flash[:notice] = 'ユーザー情報を更新しました。'
