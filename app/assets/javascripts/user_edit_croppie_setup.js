@@ -41,13 +41,11 @@ if (userImage && userImageInput) {
     var userName = document.getElementById('user-name').value;
     formData.append('user[name]', userName);
 
-    if (cropper && imageLoaded) {
+    if (cropper) {
       cropper.getCroppedCanvas().toBlob(function (blob) {
         formData.append('user[image]', blob, 'cropped-image.jpeg');
         sendFormData(userId, csrfToken, formData);
       }, 'image/jpeg', 1.0);
-    } else {
-      sendFormData(userId, csrfToken, formData);
     }
   }
 
