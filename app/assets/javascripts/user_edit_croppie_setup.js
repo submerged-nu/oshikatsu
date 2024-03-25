@@ -50,9 +50,7 @@ if (userImage && userImageInput) {
   }
 
   function sendFormData(userId, csrfToken, formData) {
-    var actionUrl = `http://localhost:3000/users/${userId}`;
-    console.log(actionUrl)
-    fetch(`http://localhost:3000/users/2`, {
+    fetch(`http://localhost:3000/users/${userId}`, {
         method: 'PATCH',
         headers: {
             'X-CSRF-Token': csrfToken
