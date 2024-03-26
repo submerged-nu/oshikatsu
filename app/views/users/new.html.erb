@@ -3,7 +3,7 @@
 <% end %>
 <div class="form-container">
   <h1 class='form-title'>ユーザー新規登録</h1>
-  <%= form_with model: @user, class: 'my-4' do |f| %>
+  <%= form_with model: @user, class: 'my-4', local: true, data: { turbo: false } do |f| %>
   <div class="form-group">
     <%= f.label :メールアドレス, class: 'form-label' %>
     <%= f.text_field :email, placeholder: 'oshikatsu@example.com', class: 'form-control mx-auto', style: 'width: 80%;' %>
