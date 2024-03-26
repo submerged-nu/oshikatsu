@@ -34,5 +34,7 @@
   </div>
 <% else %>
   <p>検索がヒットしませんでした</p>
-<% end %>
-<%= paginate @posts %>
+<% end %><br>
+<div class='pagination'>
+  <%= paginate @posts %>
+</div>

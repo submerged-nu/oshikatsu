@@ -391,3 +391,21 @@
 .post-image-field{
   display:none;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+}
+
+.pagination>li>a {          
+  color: #545454;
+}
+
+.pagination>.active>a {     
+  background: #545454;
+}
+
+.pagination>li>a:hover {        
+  color: #222222;
+}
