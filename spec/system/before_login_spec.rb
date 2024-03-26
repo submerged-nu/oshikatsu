@@ -48,7 +48,7 @@ RSpec.describe 'ログイン前', type: :system do
       expect(current_path).to eq(new_session_path)
     end
 
-    it 'ログイン前ではいいねができないこと'do
+    it 'ログイン前ではいいねができないこと' do
       visit root_path
       click_link '新規登録'
       fill_in 'user_email', with: 'a@a.a'
