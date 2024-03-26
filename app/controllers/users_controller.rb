@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_difinition
+    user_definition
     if @user.save
       auto_login(@user)
       flash[:notice] = '新規登録に成功しました'

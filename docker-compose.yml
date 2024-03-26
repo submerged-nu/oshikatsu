@@ -14,9 +14,17 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - chrome
     tty: true
     stdin_open: true
     command: >
       bash -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
 volumes:
+  db_data:
   bundle_data:
