@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LikesController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :require_login
