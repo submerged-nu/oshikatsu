@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
     if @user&.valid_password?(params[:password])
       login_success_action
     else
-      flash.now[:notice] = 'ログインに失敗しました'
-      render :new
+      flash[:notice] = 'ログインに失敗しました'
+      redirect_to login_path
     end
   end
 
