@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       login_success_action
     else
       flash[:notice] = 'ログインに失敗しました'
-      redirect_to login_path
+      redirect_to new_session_path
     end
   end
 
