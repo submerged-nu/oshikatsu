@@ -11,8 +11,7 @@
     <p style="margin: 0; font-size: 20px;"><%= @user.name %>さんの推し一覧</p>
   </div>
   <% if current_user.id == @user.id %>
-    <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_url(@user))}", target: '_blank', class: 'btn btn-twitter' do %>
-      <p class:'profile-edit-btn'>Xで共有</p>
+    <%= link_to 'Xで共有', "https://twitter.com/intent/tweet?url=#{CGI.escape(user_url(@user))}", class:'profile-edit-btn' do %>
     <% end %>
   <% end %>
   <% if current_user == @user %>
