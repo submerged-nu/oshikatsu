@@ -52,7 +52,7 @@ if (userImage && userImageInput) {
   }
 
   function sendFormData(userId, csrfToken, formData) {
-    fetch(`http://oshikatsu-app/users/${userId}`, {
+    fetch(`https://oshikatsu-app.com/users/${userId}`, {
         method: 'PATCH',
         headers: {
             'X-CSRF-Token': csrfToken
