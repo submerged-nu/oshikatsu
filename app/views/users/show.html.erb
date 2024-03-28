@@ -12,7 +12,7 @@
   </div>
   <% if current_user.id == @user.id %>
     <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_url(@user))}", target: '_blank', class: 'btn btn-twitter' do %>
-      <i class="fa-brands fa-x-twitter"></i>
+      <p class:'profile-edit-btn'>Xで共有</p>
     <% end %>
   <% end %>
   <% if current_user == @user %>
