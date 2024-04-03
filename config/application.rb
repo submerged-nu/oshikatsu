@@ -1,6 +1,7 @@
-
 require_relative 'boot'
 require 'rails/all'
+require "sprockets/railtie"
+
 Bundler.require(*Rails.groups)
 
 module Oshi
@@ -8,5 +9,6 @@ module Oshi
   class Application < Rails::Application
     config.load_defaults 7.0
     config.i18n.default_locale = :ja 
+    config.assets.enabled = true
   end
 end
