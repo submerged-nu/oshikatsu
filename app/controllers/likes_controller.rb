@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :require_login
+  before_action :set_liked_post_ids
 
   def create
     @post = Post.find(params[:post_id])
@@ -19,5 +20,11 @@ class LikesController < ApplicationController
     @post = @like.post
     @like.destroy
     respond_to(&:turbo_stream)
+  end
+
+  private
+
+  def set_liked_post_ids
+    @liked_post_ids = current_user.likes.select(:post_id).map(&:post_id).to_set if current_user
   end
 end

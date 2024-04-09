@@ -1,5 +1,5 @@
 <div id='like-<%= post.id %>'>
-  <% if current_user&.likes&.exists?(post: post) %>
+  <% if @liked_post_ids.include?(post.id) %>
     <%= link_to like_path(post), data: {turbo_method: :delete}, class: 'text-decoration-none' do %>
       <i class="fa-solid fa-heart heart-icon fa-lg"></i>
     <% end %>
