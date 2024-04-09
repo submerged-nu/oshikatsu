@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login, only: %i[new create destroy]
+  before_action :set_liked_post_ids, only: %i[index]
 
   def new
     @post = Post.new
@@ -18,7 +19,7 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(60)
+    @posts = @q.result(distinct: true).includes(:likes).order(created_at: :desc).page(params[:page]).per(60)
   end
 
   def show
@@ -51,5 +52,9 @@ class PostsController < ApplicationController
     process_tags(post_params[:tags])
     flash[:notice] = '投稿しました'
     render json: { redirect_url: posts_path }
+  end
+
+  def set_liked_post_ids
+    @liked_post_ids = current_user.likes.select(:post_id).map(&:post_id).to_set if current_user
   end
 end
