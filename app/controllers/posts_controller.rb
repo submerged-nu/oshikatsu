@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_login, only: %i[new create destroy]
   before_action :set_liked_post_ids, only: %i[index]
+  before_action :limit_posts, only: %i[new]
 
   def new
     @post = Post.new
@@ -55,6 +56,16 @@ class PostsController < ApplicationController
   end
 
   def set_liked_post_ids
-    @liked_post_ids = current_user.likes.select(:post_id).map(&:post_id).to_set if current_user
+    @liked_post_ids = current_user&.likes.select(:post_id).map(&:post_id).to_set if current_user
+  end
+
+  def limit_posts
+    start_of_day = Time.zone.now.beginning_of_day
+    end_of_day = Time.zone.now.end_of_day
+    posts_count = current_user.posts.where(created_at: start_of_day..end_of_day).count
+    return if posts_count <= 9
+
+    flash[:notice] = '1日の投稿数は10回までです'
+    redirect_to root_path
   end
 end
