@@ -7,3 +7,4 @@
 //= require user_edit_croppie_setup
 //= require close_modal
 //= require hide_modal_on_page_transition
+//= require auto_complete
