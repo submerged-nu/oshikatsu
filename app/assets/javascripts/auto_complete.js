@@ -50,3 +50,20 @@ document.addEventListener('turbo:load', function() {
     }
   });
 });
+
+document.addEventListener('turbo:load', function() {
+  document.addEventListener('click', function(event) {
+    const item = event.target.closest('.dropdown-item');
+    if (item) {
+      const searchInput = document.querySelector('.character-search-field');
+      if (searchInput) {
+        console.log('a');
+        searchInput.value = item.textContent.trim();
+        const form = document.querySelector('form');
+        form.submit();
+      } else {
+        console.log('b');
+      }
+    }
+  });
+});
