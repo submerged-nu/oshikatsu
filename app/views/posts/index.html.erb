@@ -5,8 +5,9 @@
   <h1 class="page-title">新着投稿</h1>
   <%= search_form_for @q, html: { class: 'd-flex align-items-center w-100' } do |f| %>
     <%= f.label :name_cont, 'キャラクター名検索', class: 'me-2' %>
-    <div class="me-6">
+    <div class="me-6 search-container">
       <%= f.search_field :name_cont, class: 'form-control character-search-field' %>
+      <div id='dropdown' class="dropdown-list"></div>
     </div>
     <%= f.submit "検索", class: 'search-button ms-2' %>
   <% end %>  
