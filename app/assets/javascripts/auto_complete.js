@@ -57,12 +57,9 @@ document.addEventListener('turbo:load', function() {
     if (item) {
       const searchInput = document.querySelector('.character-search-field');
       if (searchInput) {
-        console.log('a');
         searchInput.value = item.textContent.trim();
         const form = document.querySelector('form');
         form.submit();
-      } else {
-        console.log('b');
       }
     }
   });
