@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   searchInput.addEventListener('keyup', function() {
     const input = searchInput.value;
-    console.log(input)
     if (input.length > 0) {
       fetch(`/characters/auto_complete?query=${encodeURIComponent(input)}`, {
         method: 'GET'
