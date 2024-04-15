@@ -15,9 +15,10 @@
     </div><br><br>
     <%= f.file_field :image, id: 'post-image-field', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
 
-    <div class="form-group">
+    <div class="name-form-group">
       <%= f.label :name, '推しの名前(必須)', class: 'form-label' %><br>
       <%= f.text_field :name, placeholder: '15文字以内(必須)', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+      <div id='name-dropdown' class="name-dropdown-list"></div>
     </div>
 
     <div class="form-group">
