@@ -5,6 +5,15 @@ class CharactersController < ApplicationController
     load_most_liked_images
   end
 
+  def auto_complete
+    if params[:query].present?
+      @characters = Character.where("name LIKE ?", "%#{params[:query]}%").limit(7)
+      render json: @characters
+    else
+      render json: []
+    end
+  end
+
   private
 
   def set_time_range

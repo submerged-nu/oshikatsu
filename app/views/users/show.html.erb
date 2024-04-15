@@ -10,7 +10,7 @@
   <div style="flex-grow: 1; min-width: 0;">
     <p style="margin: 0; font-size: 20px;"><%= @user.name %>さんの推し一覧</p>
   </div>
-  <% if current_user.id == @user.id %>
+  <% if current_user&.id == @user.id %>
     <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_url(@user))}", target: '_blank', class: 'btn btn-twitter' do %>
       <i class="fa-brands fa-twitter"></i>
     <% end %>
