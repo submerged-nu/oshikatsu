@@ -10,5 +10,6 @@
   get 'terms_of_service', to: 'static_pages#terms_of_service'
   get 'how_to_use', to: 'static_pages#how_to_use'
   get 'characters/auto_complete', to: 'characters#auto_complete'
+  get 'recommends', to: 'recommends#index'
   root to: 'posts#index'
 end
