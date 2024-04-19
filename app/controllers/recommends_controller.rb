@@ -8,10 +8,10 @@ class RecommendsController < ApplicationController
     end
     top_tags = tag_counts.sort_by { |_tag, count| -count }.map(&:first).take(10)
     @recommends = Post.joins(:tags)
-                    .where(tags: { id: top_tags })
-                    .where.not(id: liked_posts.map(&:id))
-                    .distinct
-                    .order('RANDOM()')
-                    .page(params[:page])
+                  .where(tags: { id: top_tags })
+                  .where.not(id: liked_posts.map(&:id))
+                  .select("DISTINCT ON (posts.id) posts.*")
+                  .order("posts.id, RANDOM()")
+                  .page(params[:page])
   end
 end
