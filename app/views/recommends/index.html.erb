@@ -1,20 +1,9 @@
-<% flash.each do |message_type, message| %>
-  <div class="flash-message <%= message_type %>"><%= message %></div>
-<% end %>
 <div class="d-flex align-items-center justify-content-start mb-3">
-  <h1 class="page-title">新着投稿</h1>
-  <%= search_form_for @q, html: { class: 'd-flex align-items-center w-100' } do |f| %>
-    <%= f.label :name_cont, 'キャラクター名検索', class: 'me-2' %>
-    <div class="me-6 search-container">
-      <%= f.search_field :name_cont, class: 'form-control character-search-field' %>
-      <div id='dropdown' class="dropdown-list"></div>
-    </div>
-    <%= f.submit "検索", class: 'search-button ms-2' %>
-  <% end %>  
+  <h1 class="page-title">おすすめ投稿</h1>
 </div>
-<% if @posts.present? %>
+<% if @recommends.present? %>
   <div class="row">
-  <% @posts.each do |post| %>
+  <% @recommends.each do |post| %>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
       <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
         <div class="post">
@@ -34,8 +23,8 @@
   <% end %>  
   </div>
 <% else %>
-  <p>検索がヒットしませんでした</p>
+  <p>おすすめが作成されませんでした　いいねをたくさんすることでおすすめが作成されます</p>
 <% end %><br>
 <div class='pagination'>
-  <%= paginate @posts %>
+  <%= paginate @recommends %>
 </div>
