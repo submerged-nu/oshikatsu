@@ -11,7 +11,7 @@
     <p style="margin: 0; font-size: 20px;"><%= @user.name %>さんの推し一覧</p>
   </div>
   <% if current_user&.id == @user.id %>
-    <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_url(@user))}", target: '_blank', class: 'btn btn-twitter' do %>
+  <%= link_to "https://twitter.com/intent/tweet?text=#{CGI.escape("好きでたまらない推し達を見てください！")}&url=#{CGI.escape(user_url(@user))}", target: '_blank', class: 'btn btn-twitter' do %>
       <i class="fa-brands fa-twitter"></i>
     <% end %>
   <% end %>
