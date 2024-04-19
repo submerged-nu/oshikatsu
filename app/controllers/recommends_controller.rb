@@ -11,7 +11,7 @@ class RecommendsController < ApplicationController
                   .where(tags: { id: top_tags })
                   .where.not(id: liked_posts.map(&:id))
                   .select("DISTINCT ON (posts.id) posts.*")
-                  .order('RANDOM()')
+                  .order("posts.id, RANDOM()")
                   .page(params[:page])
   end
 end
