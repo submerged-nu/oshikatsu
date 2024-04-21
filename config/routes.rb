@@ -1,4 +1,5 @@
  Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   resources :users, only: %i[new create show edit update]
   resources :sessions, only: %i[new create destroy]
   resources :posts, only: %i[new index show create destroy] do
