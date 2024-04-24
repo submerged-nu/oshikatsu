@@ -1,4 +1,12 @@
-App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
+import consumer from "./consumer"
+
+consumer.subscriptions.create("NotificationsChannel", {
+  connected() {
+  },
+
+  disconnected() {
+  },
+
   received(data) {
     alert(data.message);
   }

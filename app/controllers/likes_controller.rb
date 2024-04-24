@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :require_login
+  after_create :send_notification
 
   def create
     @post = Post.find(params[:post_id])
@@ -23,4 +24,10 @@ class LikesController < ApplicationController
     respond_to(&:turbo_stream)
   end
 
+  private
+
+  def send_notification
+    Notification.create(event: "like", user: self.user, post: self.post)
+    ActionCable.server.broadcast("notifications_#{self.post.user.id}", { message: "#{self.user.name}があなたの投稿にいいねしました！" })
+  end
 end
