@@ -1,5 +1,2 @@
-(function() {
-  this.App || (this.App = {});
-
-  App.cable = ActionCable.createConsumer();
-}).call(this);
+window.App = window.App || {};
+App.cable = ActionCable.createConsumer();
