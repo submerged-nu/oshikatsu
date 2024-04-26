@@ -1,13 +1,13 @@
-import consumer from "./consumer"
-
-consumer.subscriptions.create("NotificationsChannel", {
+App.cable.subscriptions.create("NotificationsChannel", {
   connected() {
+    console.log("Connected to NotificationsChannel");
   },
 
   disconnected() {
+    console.log("Disconnected from NotificationsChannel");
   },
 
   received(data) {
-    alert(data.message);
+    console.log(data.message);  
   }
 });
