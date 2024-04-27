@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes, dependent: :destroy
+  has_many :notifications
   # ユーザー新規作成の際のバリデーション
   validates :email, presence: true, uniqueness: true, on: :create,format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, presence: true, length: { minimum: 8 }, if: :password_required?

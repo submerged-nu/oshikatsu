@@ -415,9 +415,20 @@
   font-size: 20px;
   padding-right: 25px;
   padding-left: 5px;
+  position: relative; 
 }
 
 .notification-bell:hover {
   text-decoration: none;
   color: white;
+}
+
+.notification-indicator {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: red;
 }
