@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const bell = document.getElementById('notification-bell');
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   const notificationsDropdown = document.querySelector('.notifications-dropdown');
-
+  
   bell.addEventListener('click', function(event) {
     event.stopPropagation();
 
@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .catch(error => console.error('Error fetching notifications:', error));
   });
+
+//　まだできてない
 
   function displayNotifications(notifications) {
     notificationsDropdown.innerHTML = '';

@@ -1,15 +1,22 @@
-App.cable.subscriptions.create("NotificationsChannel", {
-  connected() {
-  },
+document.addEventListener('DOMContentLoaded', () => {
+  const userId = document.body.getAttribute('data-user-id');
+  if (userId) {
+    App.notifications = App.cable.subscriptions.create({channel: "NotificationsChannel", user_id: userId}, {
+      connected() {
+      },
 
-  disconnected() {
-  },
+      disconnected() {
+      },
 
-  received: function(data) {
-    if (data.unread_count > 0) {
-      document.getElementById('notification-indicator').style.display = 'block';
-    } else {
-      document.getElementById('notification-indicator').style.display = 'none';
-    }
+      received(data) {
+        const notificationBell = document.getElementById('notification-bell');
+        let indicator = notificationBell.querySelector('.notification-indicator');
+
+        indicator = document.createElement('span');
+        indicator.className = 'notification-indicator';
+        notificationBell.appendChild(indicator);
+        indicator.style.display = 'block';
+      }
+    });
   }
 });

@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('turbo:load', function() {
   const searchInput = document.getElementById('q_name_cont');
   const dropdown = document.getElementById('dropdown');
-  const bell = document.getElementById('notification-bell');
 
   searchInput.addEventListener('click', function() {
     dropdown.style.display = 'block';
@@ -45,7 +44,7 @@ document.addEventListener('turbo:load', function() {
   });
 
   document.addEventListener('click', function(event) {
-    if (!searchInput.contains(event.target) && !dropdown.contains(event.target) && !bell.contains(event.target)) {
+    if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
       dropdown.style.display = 'none';
     }
   });
