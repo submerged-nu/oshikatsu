@@ -27,7 +27,7 @@ class LikesController < ApplicationController
   private
 
   def send_notification
-    Notification.create(event: "like", user: current_user, post: @post)
+    Notification.create(event: "like", user: @post.user, post: @post)
     ActionCable.server.broadcast("notifications_#{@post.user.id}", { message: "#{current_user.name}があなたの投稿にいいねしました！" })
   end
 end

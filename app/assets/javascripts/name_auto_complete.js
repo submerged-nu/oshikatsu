@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('turbo:load', function() {
   const nameInput = document.getElementById('post_name');
   const dropdown = document.getElementById('name-dropdown');
+  const bell = document.getElementById('notification-bell');
 
   document.addEventListener('click', function(event) {
     const item = event.target.closest('.name-dropdown-item');
@@ -42,7 +43,7 @@ document.addEventListener('turbo:load', function() {
   });
 
   document.addEventListener('click', function(event) {
-    if (!nameInput.contains(event.target) && !dropdown.contains(event.target)) {
+    if (!nameInput.contains(event.target) && !dropdown.contains(event.target) && !bell.contains(event.target)) {
       dropdown.style.display = 'none';
     }
   });

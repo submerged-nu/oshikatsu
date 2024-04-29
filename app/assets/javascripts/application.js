@@ -11,5 +11,5 @@
 //= require hide_modal_on_page_transition
 //= require auto_complete
 //= require name_auto_complete
-//= require notifications
+//= require notification_dropdown
 //= require channels/notifications_channel
