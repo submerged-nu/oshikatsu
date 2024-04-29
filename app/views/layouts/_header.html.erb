@@ -8,8 +8,8 @@
     <div class='new-post me-3'>
       <%= link_to '投稿する', new_post_path, data: { turbo: false } %>
     </div>
-    <div class="notification-bell">
-     <i class="fa-solid fa-bell"></i>
+    <div class="notification-bell" id="notification-bell">
+      <i class="fa-solid fa-bell"></i>
       <% if @unread_notifications.present? %>
         <span class="notification-indicator"></span>
       <% end %>

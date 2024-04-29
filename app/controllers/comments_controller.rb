@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
   end
 
   def send_notification
-    Notification.create(event: "comment", user: current_user, post: @post)
+    Notification.create(event: "comment", user: @post.user, post: @post)
     ActionCable.server.broadcast("notifications_#{@post.user.id}", { message: "#{current_user.name}があなたの投稿にコメントしました！" })
   end
 end
