@@ -1,32 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
   const bell = document.getElementById('notification-bell');
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  const notificationsDropdown = document.querySelector('.notifications-dropdown');
   
   bell.addEventListener('click', function(event) {
     event.stopPropagation();
-    displayNotifications(data);
-    markNotificationsAsRead(csrfToken);
+    displayNotifications().then(() => {
+      markNotificationsAsRead(csrfToken);
+    })
   });
 
-  function displayNotifications(notifications) {
-    fetch(`/notifications`, {
+  function displayNotifications(){
+    return fetch(`/notifications`, {
       method: 'GET'
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
       notificationDropdown(data);
     });
   }
   
   function notificationDropdown(data) {
-    const notificationDropdown = document.getElementById('notification-dropdown');
-    data.forEach(item => {
-      const option = document.createElement('div');
-      option.textContent = item.name;
-      option.classList.add('notification-dropdown-item');
-      notificationDropdown.appendChild(option);
+    const dropdown = document.getElementById('notification-dropdown');
+
+    dropdown.innerHTML = '';
+  
+    if (!data.length) {
+      dropdown.innerHTML = '<div class="notification-item">新しい通知はありません。</div>';
+      return;
+    }
+  
+    data.forEach(notification => {
+      const element = document.createElement('div');
+      element.classList.add('notification-item');
+      element.textContent = notification.message;
+      dropdown.appendChild(element);
     });
   }
 

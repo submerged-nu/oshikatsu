@@ -1,12 +1,12 @@
 .name-form-group {
-  position: relative; /* このクラスを持つdivがドロップダウンの親要素になるようにします */
+  position: relative;
 }
 
 .name-dropdown-list {
   position: absolute;
-  top: 80px; /* 名前フィールドの高さに合わせて調整する */
+  top: 80px;
   left: 55px; 
-  width: 80%; /* 名前フィールドと同じ幅になるように調整 */
+  width: 80%;
   padding: 0px;
   border-radius: 0.25rem;
   background-color: #fff;
@@ -14,7 +14,7 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   max-height: 200px;
   overflow-y: auto;
-  z-index: 1050; /* 必要に応じてz-indexを調整する */
+  z-index: 1050;
   display: none;
 }
 

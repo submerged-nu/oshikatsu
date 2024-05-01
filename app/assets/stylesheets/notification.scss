@@ -1,0 +1,32 @@
+
+.notification-container {
+  position: fixed; /* Fixed position at the top-right corner of the page */
+  top: 71px; /* 20 pixels from the top */
+  right: 20px; /* 20 pixels from the right */
+  width: 290px; /* Set a fixed width */
+  background: white; /* White background */
+  border: 1px solid #ccc; /* Grey border */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Slight shadow for 3D effect */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Hides any child overflow */
+  z-index: 1000; /* Makes sure it sits on top of other elements */
+}
+
+/* Style for each notification item */
+.notification-item {
+  padding: 10px; /* Padding around the text */
+  border-bottom: 3px solid #eee; /* Separator between items */
+  color: #333; /* Dark grey text color */
+  background-color: #f9f9f9; /* Light grey background */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Styling for the last notification item */
+.notification-item:last-child {
+  border-bottom: none; /* No border for the last item */
+}
+
+/* Hover effect for notification items */
+.notification-item:hover {
+  background-color: #e0e0e0; /* Darker background on hover */
+}
