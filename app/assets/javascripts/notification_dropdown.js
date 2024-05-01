@@ -5,26 +5,29 @@ document.addEventListener('DOMContentLoaded', function() {
   
   bell.addEventListener('click', function(event) {
     event.stopPropagation();
-
-    fetch('/notifications', { method: 'GET' })
-      .then(response => response.json())
-      .then(data => {
-        displayNotifications(data);
-        markNotificationsAsRead(csrfToken);
-      })
-      .catch(error => console.error('Error fetching notifications:', error));
+    displayNotifications(data);
+    markNotificationsAsRead(csrfToken);
   });
 
-//　まだできてない
-
   function displayNotifications(notifications) {
-    notificationsDropdown.innerHTML = '';
-    notifications.forEach(notification => {
-      const item = document.createElement('li');
-      item.textContent = `${notification.user_name}があなたの${notification.post_title}に${notification.type}しました。`; // post_nameをpost_titleに修正
-      notificationsDropdown.appendChild(item);
+    fetch(`/notifications`, {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      notificationDropdown(data);
     });
-    notificationsDropdown.style.display = 'block';
+  }
+  
+  function notificationDropdown(data) {
+    const notificationDropdown = document.getElementById('notification-dropdown');
+    data.forEach(item => {
+      const option = document.createElement('div');
+      option.textContent = item.name;
+      option.classList.add('notification-dropdown-item');
+      notificationDropdown.appendChild(option);
+    });
   }
 
   function markNotificationsAsRead(csrfToken) {

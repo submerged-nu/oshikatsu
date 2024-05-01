@@ -3,7 +3,7 @@
   resources :users, only: %i[new create show edit update]
   resources :sessions, only: %i[new create destroy]
   resources :posts, only: %i[new index show create destroy] do
-    resources :comments, only: %i[create destroy]
+    resources :comments, only: %i[create]
   end
   resources :likes, only: %i[create destroy]
   get 'characters/ranking', to: 'characters#ranking'

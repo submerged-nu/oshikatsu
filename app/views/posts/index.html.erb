@@ -1,9 +1,6 @@
 <% flash.each do |message_type, message| %>
   <div class="flash-message <%= message_type %>"><%= message %></div>
 <% end %>
-<div id="notifications-container" style="display: none; position: absolute; top: 20px; right: 20px; z-index: 1000;">
-  <div class="notifications-dropdown" style="background-color: white; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></div>
-</div>
 <div class="d-flex align-items-center justify-content-start mb-3">
   <h1 class="page-title">新着投稿</h1>
   <%= search_form_for @q, html: { class: 'd-flex align-items-center w-100' } do |f| %>

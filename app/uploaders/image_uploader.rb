@@ -6,7 +6,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
   
-  # 本番環境でのみS3に設定を変更
   if Rails.env.production?
     storage :fog
   end
