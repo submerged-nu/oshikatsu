@@ -1,44 +1,54 @@
 document.addEventListener('DOMContentLoaded', function() {
   const bell = document.getElementById('notification-bell');
+  const notificationDropdown = document.getElementById('notification-dropdown');
+  const notificationIndicator = document.querySelector('.notification-indicator');
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  
-  bell.addEventListener('click', function(event) {
-    event.stopPropagation();
-    displayNotifications().then(() => {
-      markNotificationsAsRead(csrfToken);
-    })
-  });
 
-  function displayNotifications(){
-    return fetch(`/notifications`, {
-      method: 'GET'
-    })
-    .then(response => response.json())
-    .then(data => {
-      notificationDropdown(data);
+  if (bell && notificationDropdown) {
+    bell.addEventListener('click', function(event) {
+      event.stopPropagation();
+      displayNotifications().then(() => {
+        markNotificationsAsRead(csrfToken);
+      });
+      notificationDropdown.style.display = notificationDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!notificationDropdown.contains(event.target) && !bell.contains(event.target)) {
+        notificationDropdown.style.display = 'none';
+      }
     });
   }
-  
-  function notificationDropdown(data) {
-    const dropdown = document.getElementById('notification-dropdown');
 
-    dropdown.innerHTML = '';
-  
-    if (!data.length) {
-      dropdown.innerHTML = '<div class="notification-item">新しい通知はありません。</div>';
-      return;
+  function displayNotifications() {
+    return fetch(`/notifications`, { method: 'GET' })
+      .then(response => response.json())
+      .then(data => {
+        updateNotificationDropdown(data);
+        return data;
+      });
+  }
+
+  function updateNotificationDropdown(data) {
+    notificationDropdown.innerHTML = '';
+
+    if (data.length === 0) {
+      const noNotificationItem = document.createElement('div');
+      noNotificationItem.textContent = '新しい通知はありません。';
+      noNotificationItem.classList.add('notification-item');
+      notificationDropdown.appendChild(noNotificationItem);
+    } else {
+      data.forEach(notification => {
+        const notificationItem = document.createElement('div');
+        notificationItem.textContent = notification.message;
+        notificationItem.classList.add('notification-item');
+        notificationDropdown.appendChild(notificationItem);
+      });
     }
-  
-    data.forEach(notification => {
-      const element = document.createElement('div');
-      element.classList.add('notification-item');
-      element.textContent = notification.message;
-      dropdown.appendChild(element);
-    });
   }
 
   function markNotificationsAsRead(csrfToken) {
-    if (document.querySelector('.notification-indicator').style.display !== 'none') {
+    if (notificationIndicator && notificationIndicator.style.display !== 'none') {
       fetch('/notifications/mark_as_read', {
         method: 'POST',
         headers: {
@@ -50,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            document.querySelector('.notification-indicator').style.display = 'none';
+            notificationIndicator.style.display = 'none';
           }
         })
         .catch(error => console.error('Error marking notifications as read:', error));
