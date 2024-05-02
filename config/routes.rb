@@ -10,6 +10,7 @@
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'terms_of_service', to: 'static_pages#terms_of_service'
   get 'how_to_use', to: 'static_pages#how_to_use'
+  get 'top_page', to: 'static_pages#top_page'
   get 'characters/auto_complete', to: 'characters#auto_complete'
   get 'notifications', to: 'notifications#index'
   post 'notifications/mark_as_read', to: 'notifications#mark_as_read'
