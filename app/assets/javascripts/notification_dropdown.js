@@ -60,9 +60,6 @@ function setupNotifications() {
           if (data.success) {
             const notificationIndicator = document.querySelector('.notification-indicator');
             notificationIndicator.style.display = 'none';
-            //DOMContentLoaded時点でindicatorが存在する必要があるのでindicatorを存在させるか判定するのではなく
-            //@unread_notificationsが存在する場合はblock,ない場合はnoneにして切り替えれるようにすべき
-            //これが終われば通知は終わり
           }
         })
         .catch(error => console.error('Error marking notifications as read:', error));

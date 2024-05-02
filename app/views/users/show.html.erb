@@ -28,7 +28,7 @@
           <div class="image-container">
             <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 10%;') %>
             <div class="like-icon">
-              <%= render partial: "posts/like", locals: { post: post, liked: current_user.likes.exists?(post_id: post.id) } %>
+              <%= render partial: "posts/like", locals: { post: post, liked: current_user&.likes&.exists?(post_id: post.id) } %>
             </div>
           </div>
           <h2 class="post-name"><%= post.name.truncate(11) %></h2>
