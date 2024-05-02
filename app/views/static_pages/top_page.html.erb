@@ -1,8 +1,38 @@
 <div style="text-align: center;">
-  <%= image_tag 'twitter_card.png', alt: 'Twitter Card', width: '88%' %>
-  <h2>推しの好きなところを語って共有しましょう!</h2>
+  <%= image_tag 'twitter_card.png', alt: 'Twitter Card', width: '86%' %>
+  <p>推しの好きなところを語って共有できるアプリです</p>
   <div style="display: flex; justify-content: center; gap: 20px;">
     <%= link_to '使ってみる', root_path, class: "button" %>
     <%= link_to '会員登録へ', new_user_path, class: "button" %>
   </div>
 </div>
+
+<style>
+  .button {
+    background-color: #ffae4a;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 20px 40px;
+  }
+
+  .button:hover {
+    background-color: #ff8c00;
+    transform: scale(1.1);
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .button:focus {
+    animation: blinker 1s linear infinite;
+  }
+</style>
+

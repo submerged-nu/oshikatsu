@@ -297,18 +297,6 @@
   display: none;
 }
 
-.logo {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding-left: 10px;
-}
-
-.logo h1 {
-  color: white;
-  padding: auto, 20px;
-}
-
 .fa-trash{
   font-size: 25px;
   padding-right: 20px;
@@ -354,18 +342,6 @@
 .fa-twitter{
   font-size: 30px;
   padding-right: 20px;
-}
-
-.oshikatsu{
-  color: white;
-  padding-left: 25px;
-  padding-top: 5px;
-}
-
-.oshikatsu-before-login {
-  color: white;
-  margin-left: 0;
-  padding-left: 0;
 }
 
 .cropper-height-limit{
@@ -431,4 +407,56 @@
   height: 8px;
   border-radius: 50%;
   background-color: red;
+}
+
+.button {
+  background-color: #ff8c00;
+  color: white; /* 白字 */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px; /* 角を丸くする */
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s; /* 背景色と変形のアニメーション */
+}
+
+.button:hover {
+  background-color: #45a049; /* ホバー時の背景色を暗くする */
+  transform: scale(1.1); /* ホバー時に少し大きくする */
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.button:focus {
+  animation: blinker 1s linear infinite;
+}
+
+.oshikatsu{
+  color: white;
+  padding-left: 25px;
+  padding-top: 5px;
+  text-decoration: none;
+}
+
+.oshikatsu-before-login {
+  color: white;
+  margin-left: 0;
+  padding-left: 0;
+  text-decoration: none;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding-left: 10px;
+}
+
+.logo h1 {
+  color: white;
+  padding: auto, 20px;
 }
