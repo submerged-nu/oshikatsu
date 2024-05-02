@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_user
-
+  before_action :notification_check
   private
 
   def require_login
@@ -12,5 +12,11 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     @current_user = User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def notification_check
+    return unless @current_user
+
+    @unread_notifications = @current_user.notifications&.where(read: false)
   end
 end

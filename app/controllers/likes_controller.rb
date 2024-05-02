@@ -7,6 +7,7 @@ class LikesController < ApplicationController
     @like = @post.likes.build(user: current_user)
 
     if @like.save
+      send_notification unless current_user == @post.user
       @liked_post_ids = current_user.likes.select(:post_id).map(&:post_id).to_set
       respond_to(&:turbo_stream)
     else
@@ -23,4 +24,10 @@ class LikesController < ApplicationController
     respond_to(&:turbo_stream)
   end
 
+  private
+
+  def send_notification
+    Notification.create(event: "like", user: @post.user, post: @post)
+    ActionCable.server.broadcast("notifications_#{@post.user.id}", { message: "#{current_user.name}があなたの投稿にいいねしました！" })
+  end
 end

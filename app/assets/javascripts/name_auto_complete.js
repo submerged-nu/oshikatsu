@@ -40,10 +40,4 @@ document.addEventListener('turbo:load', function() {
       dropdown.style.display = 'none';
     }
   });
-
-  document.addEventListener('click', function(event) {
-    if (!nameInput.contains(event.target) && !dropdown.contains(event.target)) {
-      dropdown.style.display = 'none';
-    }
-  });
 });

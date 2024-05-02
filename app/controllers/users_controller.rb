@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(30)
+    @liked_post_ids = current_user&.likes.pluck(:post_id).to_set
   end
 
   def edit; end
@@ -68,4 +69,3 @@ class UsersController < ApplicationController
   end
 end
 
-#まともに動くコード

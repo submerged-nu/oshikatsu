@@ -8,6 +8,14 @@
     <div class='new-post me-3'>
       <%= link_to '投稿する', new_post_path, data: { turbo: false } %>
     </div>
+    <div class="notification-bell" id="notification-bell">
+      <i class="fa-solid fa-bell"></i>
+      <% if @unread_notifications.present? %>
+        <span class="notification-indicator" style="display: block;"></span>
+      <% else %>
+        <span class="notification-indicator" style="display: none;"></span>
+      <% end %>
+    </div>
     <% if @current_user.image.url %>
       <%= link_to user_path(@current_user.id), style: 'display: inline-block; width: 50px; height: 50px; border-radius: 50%; margin: 10px 0;' do %>
         <%= image_tag @current_user.image.url, class: 'header-user-icon', style: 'width: 100%; height: 100%; border-radius: 50%;' %>

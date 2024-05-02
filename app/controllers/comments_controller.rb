@@ -2,21 +2,17 @@ class CommentsController < ApplicationController
   before_action :require_login
   before_action :set_post
   before_action :limit_comments, only: [:create]
+
   def create
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
-    flash[:notice] = if @comment.save
-                       'コメントを投稿しました'
-                     else
-                       'コメントは200文字以内にしてください'
-                     end
+    if @comment.save
+      flash[:notice] = 'コメントを投稿しました'
+      send_notification unless current_user == @post.user
+    else
+      flash[:notice] = 'コメントは200文字以内にしてください'
+    end
     redirect_to root_path
-  end
-
-  def destroy
-    @comment = @post.comments.find(params[:id])
-    @comment.destroy
   end
 
   private
@@ -37,5 +33,10 @@ class CommentsController < ApplicationController
 
     flash[:notice] = '1日のコメント数は10回までです'
     redirect_to root_path
+  end
+
+  def send_notification
+    Notification.create(event: "comment", user: @post.user, post: @post)
+    ActionCable.server.broadcast("notifications_#{@post.user.id}", { message: "#{current_user.name}があなたの投稿にコメントしました！" })
   end
 end

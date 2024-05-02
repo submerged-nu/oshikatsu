@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M25EW0C3ZC"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -25,7 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
     </head>
-  <body>
+  <body data-user-id="<%= current_user&.id %>">
   <% if logged_in? %>
     <%= render 'layouts/header' %>
   <% else %>
@@ -35,6 +34,7 @@
     <%= render 'layouts/side_bar' %>
   </div>
   <div class="main-content">
+    <div id='notification-dropdown' class='notification-container' style="display: none;"></div>
     <%= yield %>
   </div>
   </body>

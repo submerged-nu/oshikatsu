@@ -1,5 +1,3 @@
- 
-
 class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :image, ImageUploader
@@ -7,11 +5,10 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes, dependent: :destroy
-  # ユーザー新規作成の際のバリデーション
+  has_many :notifications
   validates :email, presence: true, uniqueness: true, on: :create,format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, presence: true, length: { minimum: 8 }, if: :password_required?
   validates :password, confirmation: true, if: :password_required?
-  # ユーザー編集の際のバリデーション
   validate :name_length, on: :update
 
   private

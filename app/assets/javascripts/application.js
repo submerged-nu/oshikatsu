@@ -1,4 +1,6 @@
 //= require jquery3
+//= require action_cable
+//= require channels/cable
 //= require popper
 //= require bootstrap-sprockets
 //= require turbo
@@ -9,4 +11,5 @@
 //= require hide_modal_on_page_transition
 //= require auto_complete
 //= require name_auto_complete
-
+//= require notification_dropdown
+//= require channels/notifications_channel
