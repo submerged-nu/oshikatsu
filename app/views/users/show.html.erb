@@ -22,17 +22,19 @@
 <% if @posts.present? %>
   <div class="row">
   <% @posts.each do |post| %>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+    <div class="col-3 mb-4">
       <%= link_to post_path(post.id), data: { turbo_stream: true }, class: "text-decoration-none" do %>
         <div class="post">
           <div class="image-container">
-            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 10%;') %>
+            <%= image_tag(post.image.url, alt: post.name, class: 'post-img', style: 'border-radius: 9% 9% 0 0;') %>
             <div class="like-icon">
               <%= render partial: "posts/like", locals: { post: post, liked: current_user&.likes&.exists?(post_id: post.id) } %>
             </div>
           </div>
-          <h2 class="post-name"><%= post.name.truncate(11) %></h2>
-          <%= post.body.truncate(50) %>
+          <div class='post-sentence-container'> 
+            <h2 class="post-name"><%= post.name.truncate(11) %></h2>
+            <%= post.body.truncate(50) %>
+          </div>
         </div>
       <% end %>
     </div>
