@@ -1,7 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+function setupNotifications() {
   const bell = document.getElementById('notification-bell');
   const notificationDropdown = document.getElementById('notification-dropdown');
-  const notificationIndicator = document.querySelector('.notification-indicator');
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
   if (bell && notificationDropdown) {
@@ -48,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function markNotificationsAsRead(csrfToken) {
-    if (notificationIndicator && notificationIndicator.style.display !== 'none') {
       fetch('/notifications/mark_as_read', {
         method: 'POST',
         headers: {
@@ -60,10 +58,16 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
+            const notificationIndicator = document.querySelector('.notification-indicator');
             notificationIndicator.style.display = 'none';
+            //DOMContentLoaded時点でindicatorが存在する必要があるのでindicatorを存在させるか判定するのではなく
+            //@unread_notificationsが存在する場合はblock,ない場合はnoneにして切り替えれるようにすべき
+            //これが終われば通知は終わり
           }
         })
         .catch(error => console.error('Error marking notifications as read:', error));
-    }
   }
-});
+};
+
+document.addEventListener('DOMContentLoaded', setupNotifications);
+document.addEventListener('turbolinks:load', setupNotifications);

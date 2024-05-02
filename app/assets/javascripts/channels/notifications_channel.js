@@ -11,10 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
       received(data) {
         const notificationBell = document.getElementById('notification-bell');
         let indicator = notificationBell.querySelector('.notification-indicator');
-
-        indicator = document.createElement('span');
-        indicator.className = 'notification-indicator';
-        notificationBell.appendChild(indicator);
         indicator.style.display = 'block';
       }
     });

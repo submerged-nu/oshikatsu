@@ -20,6 +20,8 @@ class NotificationsController < ApplicationController
   end
 
   def mark_as_read
+    return unless @current_user.notifications.where(read: false)
+
     @current_user.notifications.where(read: false).update_all(read: true)
     render json: { success: true }
   end

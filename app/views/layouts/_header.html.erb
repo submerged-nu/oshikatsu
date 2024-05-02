@@ -11,7 +11,9 @@
     <div class="notification-bell" id="notification-bell">
       <i class="fa-solid fa-bell"></i>
       <% if @unread_notifications.present? %>
-        <span class="notification-indicator"></span>
+        <span class="notification-indicator" style="display: block;"></span>
+      <% else %>
+        <span class="notification-indicator" style="display: none;"></span>
       <% end %>
     </div>
     <% if @current_user.image.url %>
