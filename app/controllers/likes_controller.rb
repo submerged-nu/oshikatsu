@@ -7,7 +7,7 @@ class LikesController < ApplicationController
     @like = @post.likes.build(user: current_user)
 
     if @like.save
-      send_notification 
+      send_notification unless current_user == @post.user
       @liked_post_ids = current_user.likes.select(:post_id).map(&:post_id).to_set
       respond_to(&:turbo_stream)
     else

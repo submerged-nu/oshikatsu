@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       flash[:notice] = 'コメントを投稿しました'
-      send_notification
+      send_notification unless current_user == @post.user
     else
       flash[:notice] = 'コメントは200文字以内にしてください'
     end
