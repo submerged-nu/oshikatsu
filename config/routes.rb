@@ -1,9 +1,14 @@
  Rails.application.routes.draw do
+   get 'oauths/oauth'
   mount ActionCable.server => '/cable'
   resources :users, only: %i[new create show edit update]
   resources :sessions, only: %i[new create destroy]
   resources :posts, only: %i[new index show create destroy] do
     resources :comments, only: %i[create]
+  end
+  resources :oauths, only: [:oauth, :callback] do
+    get :oauth, on: :collection
+    get :callback, on: :collection
   end
   resources :likes, only: %i[create destroy]
   get 'characters/ranking', to: 'characters#ranking'
