@@ -1,11 +1,5 @@
 class OauthsController < ApplicationController
 
-#完全な新規登録ができること
-#新規登録の際、アイコンとユーザー名が設定されること
-#すでにメールアドレスが登録されていて、それに対してgoogleでログインができること
-#うまくいかなかった場合、エラーを出すこと
-#特有のメソッドを理解して、そこからメールアドレスだけを抜き出してユーザー登録をする
-
   def oauth
     login_at(params[:provider])
   end
