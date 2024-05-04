@@ -6,11 +6,9 @@
   resources :posts, only: %i[new index show create destroy] do
     resources :comments, only: %i[create]
   end
-  resources :oauths, only: [:oauth, :callback] do
-    get :oauth, on: :collection
-    get :callback, on: :collection
-  end
   resources :likes, only: %i[create destroy]
+  get 'oauths/oauth', to: 'oauths#oauth'
+  get 'oauths/callback', to: 'oauths#callback'
   get 'characters/ranking', to: 'characters#ranking'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'terms_of_service', to: 'static_pages#terms_of_service'
