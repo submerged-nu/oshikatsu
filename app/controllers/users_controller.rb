@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user_definition
+    @user = User.new(user_create_params)
     if @user.save
       auto_login(@user)
       flash[:notice] = '新規登録に成功しました'
@@ -38,12 +38,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def user_definition
-    @user = User.new(user_create_params)
-    @user.image = File.open(Rails.root.join('public', 'images', 'default_icon.png'))
-    @user.name = '推し大好き'
-  end
 
   def default_icon_url
     'https://oshikatsu-storage.s3.amazonaws.com/uploads/user/image/3/kkrn_icon_user_11.png'

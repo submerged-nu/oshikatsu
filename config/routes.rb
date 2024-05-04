@@ -1,4 +1,5 @@
  Rails.application.routes.draw do
+   get 'oauths/oauth'
   mount ActionCable.server => '/cable'
   resources :users, only: %i[new create show edit update]
   resources :sessions, only: %i[new create destroy]
@@ -6,6 +7,8 @@
     resources :comments, only: %i[create]
   end
   resources :likes, only: %i[create destroy]
+  get 'oauths/oauth', to: 'oauths#oauth'
+  get 'oauths/callback', to: 'oauths#callback'
   get 'characters/ranking', to: 'characters#ranking'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'terms_of_service', to: 'static_pages#terms_of_service'

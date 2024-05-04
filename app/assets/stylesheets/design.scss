@@ -16,11 +16,10 @@
 
 .before-login-header {
   width: 100%;
-  min-height: 73px;
+  min-height: 70px;
   position: sticky;
   top: 0;
   z-index: 3;
-  border-bottom: 3px solid #ccc;
   background-color: #000000;
   display: flex;
   justify-content: space-between;
@@ -467,4 +466,43 @@
 
 .post-sentence-container{
   padding: 8px;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  border: none;
+}
+
+.google-button svg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.google-button p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.google-submit-button {
+  display: block;
+  width: 30%;
+  margin: 0px auto;
+  padding: 10px 0;
+  background-color: #646464;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none; 
+}
+
+.google-submit-button:hover {
+  background-color: #000000;
 }

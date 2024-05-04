@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_validation :set_default_values
+
   authenticates_with_sorcery!
   mount_uploader :image, ImageUploader
   enum role: { user: 0, admin: 1 }
@@ -12,6 +14,11 @@ class User < ApplicationRecord
   validate :name_length, on: :update
 
   private
+
+  def set_default_values
+    self.name = '推し大好き'
+    self.image = File.open(Rails.root.join('public', 'images', 'default_icon.png'))
+  end
 
   def password_required?
     new_record? || password.present?
