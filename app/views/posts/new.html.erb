@@ -28,7 +28,7 @@
 
     <div class="form-group">
       <%= f.label :tags, "タグ1", class: 'form-label' %>
-      <%= f.text_field :name, placeholder: 'タグを記入', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+      <%= f.text_field :tag1, placeholder: 'タグを記入', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
       <div id="tags">
         <%= f.fields_for :tags do |tag| %>
           <%= render 'tag_fields', f: tag %>

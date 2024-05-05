@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :image, :body, tags_attributes: [:id, :name, :_destroy])
+    params.require(:post).permit(:name, :image, :body, :tag1)
   end
 
   def process_tags(tags_string)
