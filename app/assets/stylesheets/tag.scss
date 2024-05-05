@@ -19,6 +19,22 @@
   text-align: center;
 }
 
+.tag-delete-button {
+  display: inline-block;
+  width: 60px;
+  margin: 0 0 0 330px;
+  padding: 4px;
+  background-color: #646464;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  text-align: center;
+}
+
 .tag-button:hover {
   background-color: #000000;
 }
