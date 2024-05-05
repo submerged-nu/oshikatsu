@@ -1,0 +1,5 @@
+<div class="form-group nested-fields">
+  <%= f.label :tags, "タグ名", class: 'form-label' %>
+  <%= link_to_remove_association "削除", f %>
+  <%= f.text_field :name, placeholder: 'タグを記入', class: 'form-control mx-auto', style: 'width: 80%;' %><br>
+</div>
