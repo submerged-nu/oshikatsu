@@ -14,6 +14,7 @@ gem 'ransack'
 gem 'sassc-rails'
 gem 'sass-rails', '~>5.0'
 gem 'sorcery'
+gem 'cocoon'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
 

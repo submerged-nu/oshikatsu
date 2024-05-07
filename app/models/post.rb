@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   validate :name_present?
   validate :name_length
   validates :body, length: { maximum: 1000 }
+  accepts_nested_attributes_for :tags, reject_if: :all_blank, allow_destroy: true
 
   private
 

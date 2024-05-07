@@ -13,3 +13,5 @@
 //= require name_auto_complete
 //= require notification_dropdown
 //= require channels/notifications_channel
+//= require cocoon
+//= require tag

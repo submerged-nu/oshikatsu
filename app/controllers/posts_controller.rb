@@ -9,9 +9,11 @@ class PostsController < ApplicationController
 
   def create
     character = Character.find_or_create_by(name: post_params[:name])
-    @post = current_user.posts.build(post_params.except(:tags).merge(character_id: character.id))
+    @post = current_user.posts.build(post_params.except(:tag1, :tag2, :tag3, :tag4, :tag5).merge(character_id: character.id))
     if @post.save
-      post_success_action
+      process_tags(post_params[:tags])
+      flash[:notice] = '投稿しました'
+      render json: { redirect_url: posts_path }
     else
       flash[:notice] = "新規投稿は '画像必須' '名前は1~15文字' '推しへの愛を語るところは1000文字以内' です"
       render json: { redirect_url: new_post_path }
@@ -39,20 +41,16 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :image, :body, :tags)
+    params.require(:post).permit(:name, :image, :body, :tags_attributes, :tag1, :tag2, :tag3, :tag4, :tag5)
   end
 
   def process_tags(tags_string)
-    tags_string.split(',').each do |tag_name|
+    (1..5).each do |number|
+      tag_name = post_params["tag#{number}".to_sym]
+      next if tag_name.blank?
       tag = Tag.find_or_create_by(name: tag_name.strip)
       @post.tags << tag unless @post.tags.include?(tag)
     end
-  end
-
-  def post_success_action
-    process_tags(post_params[:tags])
-    flash[:notice] = '投稿しました'
-    render json: { redirect_url: posts_path }
   end
 
   def set_liked_post_ids

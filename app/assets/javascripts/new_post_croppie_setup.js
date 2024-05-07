@@ -44,11 +44,15 @@ if (postImage && postImageInput) {
         var formData = new FormData(e.target);
         var postName = document.querySelector('#post_name').value;
         var postBody = document.querySelector('#post_body').value;
-        var postTags = document.querySelector('#post_tags').value;
+        var firstTag = document.querySelector('#post_tag1').value;
+        var tagInputs = document.querySelectorAll('.nested-fields input[type="text"]');
+        tagInputs.forEach((input, index) => {
+          formData.append(`post[tag${index + 2}]`, input.value);
+        });
         formData.append('post[image]', blob, 'cropped-image.jpeg');
         formData.append('post[name]', postName);
         formData.append('post[body]', postBody);
-        formData.append('post[tags]', postTags);
+        formData.append('post[tag1]', firstTag);
 
         fetch('/posts', {
             method: 'POST',
