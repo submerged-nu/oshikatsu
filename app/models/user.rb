@@ -16,6 +16,8 @@ class User < ApplicationRecord
   private
 
   def set_default_values
+    return unless new_record?
+    
     self.name = '推し大好き'
     self.image = File.open(Rails.root.join('public', 'images', 'default_icon.png'))
   end

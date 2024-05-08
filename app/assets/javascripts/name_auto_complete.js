@@ -30,14 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('turbo:load', function() {
-  const nameInput = document.getElementById('post_name');
   const dropdown = document.getElementById('name-dropdown');
 
   document.addEventListener('click', function(event) {
-    const item = event.target.closest('.name-dropdown-item');
-    if (item) {
-      nameInput.value = item.textContent.trim();
-      dropdown.style.display = 'none';
-    }
+    dropdown.style.display = 'none';
   });
 });
