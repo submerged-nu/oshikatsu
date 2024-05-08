@@ -4,7 +4,7 @@ Rails.application.config.sorcery.configure do |config|
 
   config.google.key = ENV['GOOGLE_CLIENT_ID']
   config.google.secret = ENV['GOOGLE_CLIENT_SECRET']
-  config.google.callback_url = "http://localhost:3000/oauths/callback?provider=google"
+  config.google.callback_url = "http://www.oshikatsu-app.com/oauths/callback?provider=google"
   config.google.user_info_mapping = { email: "email" }
   
   config.user_config do |user|
