@@ -38,6 +38,7 @@ if (postImage && postImageInput) {
 
   function submitCroppedImage(e) {
     e.preventDefault();
+    document.getElementById('loading-indicator').style.display = 'block';
     var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
     cropper.getCroppedCanvas().toBlob(function (blob) {
