@@ -34,6 +34,7 @@ if (userImage && userImageInput) {
 
   function submitCroppedImage(e) {
     e.preventDefault();
+    document.getElementById('loading-indicator').style.display = 'block';
 
     var userId = e.target.getAttribute('data-user-id');
     var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");

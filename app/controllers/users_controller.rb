@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-
     if @user.update(user_update_params)
       flash[:notice] = 'ユーザー情報を更新しました。'
       render json: { redirect_url: posts_path }
